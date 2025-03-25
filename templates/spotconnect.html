@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Spotify Login</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
+    </head>
+    <body>
+        <div id="page-wrapper">
+            <header>
+                <h1>Connect to Spotify</h1>
+                <p>Log in to your Spotify account to continue.</p>
+            </header>
+            <section>
+                <a href="{{ url_for('spotify_login') }}" class="button">Log in with Spotify</a>
+            </section>
+        </div>
+    </body>
+</html>
