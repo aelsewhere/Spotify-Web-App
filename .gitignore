@@ -2,3 +2,6 @@
 .venv/
 
 .env
+
+# ignore eda
+notebooks/eda.ipynb
