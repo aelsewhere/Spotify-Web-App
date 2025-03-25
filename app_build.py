@@ -56,7 +56,7 @@ def dashboard():
     try:
         # Fetch top 10 tracks
         top_tracks = sp.current_user_top_tracks(limit=10)
-        print("Top Tracks Response:", top_tracks)  # Debugging
+        #print("Top Tracks Response:", top_tracks)  # Debugging
         tracks = [
             {
                 'name': track['name'],
@@ -68,7 +68,7 @@ def dashboard():
 
         # Fetch recently played tracks
         recently_played = sp.current_user_recently_played(limit=10)
-        print("Recently Played Response:", recently_played)  # Debugging
+        #print("Recently Played Response:", recently_played)  # Debugging
         recent_tracks = [
             {
                 'name': item['track']['name'],
@@ -82,4 +82,5 @@ def dashboard():
         recent_tracks = []
         print(f"Error fetching data: {e}")
 
+    print("Tracks being passed to template:", tracks)
     return render_template('dashboard.html', tracks=tracks, recent_tracks=recent_tracks)
