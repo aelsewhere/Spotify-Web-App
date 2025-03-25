@@ -5,3 +5,4 @@
 
 # ignore eda
 notebooks/eda.ipynb
+notebooks/spotify_eda.ipynb
