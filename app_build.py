@@ -84,3 +84,12 @@ def dashboard():
 
     print("Tracks being passed to template:", tracks)
     return render_template('dashboard.html', tracks=tracks, recent_tracks=recent_tracks)
+
+@build_v1.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('home'))
+
+@build_v1.route('/mood-select.html')
+def mood_select():
+    return render_template('mood-select.html')

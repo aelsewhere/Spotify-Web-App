@@ -44,7 +44,6 @@
             <h1>Spotify Dashboard</h1>
             <p>Welcome to your personalized Spotify dashboard!</p>
 
-
             <div class="widget-container">
                 <!-- Top Songs Widget -->
                 <div class="widget animate__animated animate__fadeIn">
@@ -88,6 +87,13 @@
                         {% endfor %}
                     </ul>
                 </div>
+            </div>
+
+            <!-- Buttons Section -->
+            <div class="button-container" style="text-align: center; margin-top: 30px;">
+                <a href="/previous-page" class="btn" style="margin: 0 10px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Previous</a>
+                <a href="/mood-select.html" class="btn" style="margin: 0 10px; padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">Mood Select</a>
+                <a href="/next-page" class="btn" style="margin: 0 10px; padding: 10px 20px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px;">Next</a>
             </div>
         </div>
         <script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
