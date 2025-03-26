@@ -13,14 +13,13 @@
         }
         .filter-button {
             padding: 10px 20px;
-            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
         .filter-button.selected {
-            background-color: #28a745;
+            border: 2px solid #000;
         }
     </style>
 </head>
@@ -33,14 +32,20 @@
         const maxSelections = 3;
         let selectedButtons = [];
 
-        // Generate 206 buttons
-        for (let i = 1; i <= 206; i++) {
-            const button = document.createElement('button');
-            button.textContent = `Mood ${i}`;
-            button.className = 'filter-button';
-            button.addEventListener('click', () => toggleSelection(button, i));
-            buttonContainer.appendChild(button);
-        }
+        // Fetch emotes data from emotes.json
+        fetch('/notebooks/emotes.json')
+            .then(response => response.json())
+            .then(emotes => {
+                emotes.forEach((emote, index) => {
+                    const button = document.createElement('button');
+                    button.textContent = emote.Emotion;
+                    button.className = 'filter-button';
+                    button.style.backgroundColor = emote.Hex || '#007bff'; // Default color if Hex is missing
+                    button.addEventListener('click', () => toggleSelection(button, index));
+                    buttonContainer.appendChild(button);
+                });
+            })
+            .catch(error => console.error('Error loading emotes:', error));
 
         function toggleSelection(button, id) {
             if (selectedButtons.includes(id)) {
