@@ -3,10 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blank Dashboard</title>
+    <title>Mood Select</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .filter-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .filter-button.selected {
+            background-color: #28a745;
+        }
+    </style>
 </head>
 <body>
-    <!-- Blank page -->
+    <h1>Select Your Moods</h1>
+    <div class="button-container" id="buttonContainer"></div>
+
+    <script>
+        const buttonContainer = document.getElementById('buttonContainer');
+        const maxSelections = 3;
+        let selectedButtons = [];
+
+        // Generate 206 buttons
+        for (let i = 1; i <= 206; i++) {
+            const button = document.createElement('button');
+            button.textContent = `Mood ${i}`;
+            button.className = 'filter-button';
+            button.addEventListener('click', () => toggleSelection(button, i));
+            buttonContainer.appendChild(button);
+        }
+
+        function toggleSelection(button, id) {
+            if (selectedButtons.includes(id)) {
+                // Deselect button
+                selectedButtons = selectedButtons.filter(btnId => btnId !== id);
+                button.classList.remove('selected');
+            } else if (selectedButtons.length < maxSelections) {
+                // Select button
+                selectedButtons.push(id);
+                button.classList.add('selected');
+            } else {
+                alert(`You can only select up to ${maxSelections} moods.`);
+            }
+        }
+    </script>
 </body>
 </html>
