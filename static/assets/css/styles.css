@@ -3,6 +3,7 @@
 
 /* Global Resets */
 html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp, small,
 strike, strong, sub, sup, tt, var, b, u, i, center,
@@ -275,7 +276,7 @@ ul.icons li a:hover {
     justify-content: center;
 }
 
-/* Row */
+/* Grid Layout */
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -305,6 +306,10 @@ ul.icons li a:hover {
 
 .row.aln-bottom {
     align-items: flex-end;
+}
+
+.row > .col-12 {
+    width: 100%;
 }
 
 .row > .col-4 {
@@ -350,26 +355,65 @@ ul.icons li a:hover {
     position: relative;
     overflow: hidden;
     padding: 6em 0 6em 0;
-    background: #9d07b7;
+    background: #483949;
     color: #fff;
     text-align: center;
 }
 
-#footer h2, #footer h3, #footer h4, #footer h5, #footer h6 {
+#footer h3 {
     color: #fff;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+#footer p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1em;
+    margin-bottom: 2em;
+}
+
+#footer ul.icons {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+#footer ul.icons li {
+    display: inline-block;
+}
+
+#footer ul.icons li a {
+    color: #fff;
+    font-size: 1.5em;
+    transition: color 0.3s ease;
+}
+
+#footer ul.icons li a:hover {
+    color: #ef8376;
 }
 
 #footer .copyright {
-    text-align: center;
-    color: rgba(128, 128, 128, 0.75);
+    margin-top: 2em;
     font-size: 0.8em;
-    cursor: default;
+    color: rgba(255, 255, 255, 0.5);
 }
 
-#footer .copyright a {
-    color: rgba(128, 128, 128, 0.75);
+/* Contact Section */
+section.contact {
+    margin-bottom: 2em;
 }
 
-#footer .copyright a:hover {
-    color: rgba(212, 212, 212, 0.85);
+section.contact h3 {
+    font-size: 1.5em;
+    color: #fff;
+    margin-bottom: 0.5em;
+}
+
+section.contact p {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 1.5em;
 }
