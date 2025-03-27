@@ -1,85 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mood Select</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <style>
-        .button-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .filter-button {
-            padding: 10px 20px;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .filter-button.selected {
-            border: 2px solid #000;
-        }
-    </style>
-</head>
-<body>
-    <h1>Select Your Moods</h1>
-    <div class="button-container" id="buttonContainer"></div>
-    <div class="category-container" id="categoryContainer"></div>
+{% extends "base.html" %}
 
-    <script>
-        const categoryContainer = document.getElementById('categoryContainer');
-        const maxSelections = 3;
-        let selectedButtons = [];
+{% block title %}Mood Select{% endblock %}
 
-        // Fetch emotes data from emotes.json
-        fetch('/static/notebooks/emotes.json')
-            .then(response => response.json())
-            .then(emotes => {
-                const categories = {};
+{% block content %}
+<div class="container">
+    <h1>Select Your Mood</h1>
+    <div id="categoryContainer"></div>
+</div>
+<script>
+    const categoryContainer = document.getElementById('categoryContainer');
+    const maxSelections = 3;
+    let selectedButtons = [];
 
-                // Group emotions by category
-                emotes.forEach(emote => {
-                    if (!categories[emote.Category]) {
-                        categories[emote.Category] = [];
-                    }
-                    categories[emote.Category].push(emote);
+    fetch('/static/notebooks/emotes.json')
+        .then(response => response.json())
+        .then(emotes => {
+            const categories = {};
+
+            emotes.forEach(emote => {
+                if (!categories[emote.Category]) {
+                    categories[emote.Category] = [];
+                }
+                categories[emote.Category].push(emote);
+            });
+
+            Object.keys(categories).forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                categoryDiv.innerHTML = `<h2>${category}</h2>`;
+
+                categories[category].forEach((emote, index) => {
+                    const button = document.createElement('button');
+                    button.textContent = emote.Emotion;
+                    button.className = 'filter-button';
+                    button.style.backgroundColor = emote.hex || '#007bff';
+                    button.style.opacity = Math.min(1, Math.max(0.2, (emote.Intensity || 1) / 5));
+
+                    button.addEventListener('click', () => toggleSelection(button, index));
+                    categoryDiv.appendChild(button);
                 });
 
-                // Create a section for each category
-                Object.keys(categories).forEach(category => {
-                    const categoryDiv = document.createElement('div');
-                    categoryDiv.className = 'category';
-                    categoryDiv.innerHTML = `<h2>${category}</h2>`;
-
-                    categories[category].forEach((emote, index) => {
-                        const button = document.createElement('button');
-                        button.textContent = emote.Emotion;
-                        button.className = 'filter-button';
-                        button.style.backgroundColor = emote.hex || '#007bff';
-                        button.style.opacity = Math.min(1, Math.max(0.2, (emote.Intensity || 1) / 5));
-
-                        button.addEventListener('click', () => toggleSelection(button, index));
-                        categoryDiv.appendChild(button);
-                    });
-
-                    categoryContainer.appendChild(categoryDiv);
-                });
-            })
-            .catch(error => console.error('Error loading emotes:', error));
-
-        function toggleSelection(button, id) {
-            if (selectedButtons.includes(id)) {
-                selectedButtons = selectedButtons.filter(btnId => btnId !== id);
-                button.classList.remove('selected');
-            } else if (selectedButtons.length < maxSelections) {
-                selectedButtons.push(id);
-                button.classList.add('selected');
-            } else {
-                alert(`You can only select up to ${maxSelections} moods.`);
-            }
-        }
-    </script>
-</body>
-</html>
+                categoryContainer.appendChild(categoryDiv);
+            });
+        })
+        .catch(error => console.error('Error loading emotes:', error));
+</script>
+{% endblock %}

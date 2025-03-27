@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Spotify Web App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}">
+    {% block extra_styles %}{% endblock %}
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="toolbar">
+            <h1 class="logo"><a href="{{ url_for('home') }}">Spotify</a></h1>
+            <!-- Home Button -->
+            <a href="{{ url_for('home') }}" class="icon-placeholder">
+                <i class="fas fa-home"></i>
+            </a>
+            <!-- Dashboard Button -->
+            <a href="{{ url_for('dashboard') }}" class="icon-placeholder">
+                <i class="fas fa-tachometer-alt"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <ul class="icons">
+                <li><a href="https://twitter.com" class="fab fa-twitter" target="_blank"></a></li>
+                <li><a href="https://facebook.com" class="fab fa-facebook-f" target="_blank"></a></li>
+                <li><a href="https://instagram.com" class="fab fa-instagram" target="_blank"></a></li>
+            </ul>
+            <div class="copyright">
+                <ul class="menu">
+                    <li>&copy; 2025 Spotify Web App. All rights reserved.</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
