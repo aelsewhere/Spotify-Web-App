@@ -10,6 +10,10 @@ build_v1.secret_key = 'kdjsfakjsdhfue9oweiuf8i'
 def home():
     return render_template('index.html')
 
+@build_v1.route('/test-static')
+def test_static():
+    return build_v1.send_static_file('assets/css/styles.css')
+
 @build_v1.route('/spotify-connect')
 def spotify_connect():
     return render_template('spotconnect.html')
