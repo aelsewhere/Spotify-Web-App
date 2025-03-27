@@ -1,3 +1,4 @@
+
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
 
@@ -505,12 +506,21 @@ section.contact p {
 
 /* Add padding to the main content */
 main {
-    padding: 5em 1em; /* 5em top and bottom, 1em left and right */
-    margin: 0 auto; /* Center the content horizontally */
-    max-width: 1200px; /* Optional: Limit the width of the content */
+    padding: 5em 1em; 
+    margin: 0 auto; 
+    max-width: 1200px; 
     box-sizing: border-box; /* Include padding in the width calculation */
 }
 
-body:not(.homepage) main {
-    padding-top: 5em; /* Adjust based on the height of the toolbar */
+.widget-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
+
+.widget {
+    flex:1;
+    min-width: 300px;
+    max-width: 48%;
+    box-sizing: border-box;
