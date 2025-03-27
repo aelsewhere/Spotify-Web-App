@@ -33,14 +33,18 @@
         let selectedButtons = [];
 
         // Fetch emotes data from emotes.json
-        fetch('/notebooks/emotes.json')
+        fetch('/static/notebooks/emotes.json')
             .then(response => response.json())
             .then(emotes => {
                 emotes.forEach((emote, index) => {
                     const button = document.createElement('button');
                     button.textContent = emote.Emotion;
                     button.className = 'filter-button';
-                    button.style.backgroundColor = emote.Hex || '#007bff'; // Default color if Hex is missing
+                    button.style.backgroundColor = emote.hex || '#007bff'; // Default color
+                    // Set opacity based on intensity (1 -> 0.2, 5 -> 1.0)
+                    const intensity = emote.Intensity || 1; // Default intensity 1
+                    button.style.opacity = Math.min(1, Math.max(0.2, intensity / 5));
+
                     button.addEventListener('click', () => toggleSelection(button, index));
                     buttonContainer.appendChild(button);
                 });
