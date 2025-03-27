@@ -73,6 +73,7 @@ body.homepage #header {
     cursor: default;
     height: 100vh; /* Full viewport height */
     min-height: 40em;
+    margin-bottom: 2em;
 }
 
 body.homepage #header h1 {
