@@ -26,9 +26,10 @@
 <body>
     <h1>Select Your Moods</h1>
     <div class="button-container" id="buttonContainer"></div>
+    <div class="category-container" id="categoryContainer"></div>
 
     <script>
-        const buttonContainer = document.getElementById('buttonContainer');
+        const categoryContainer = document.getElementById('categoryContainer');
         const maxSelections = 3;
         let selectedButtons = [];
 
@@ -36,28 +37,43 @@
         fetch('/static/notebooks/emotes.json')
             .then(response => response.json())
             .then(emotes => {
-                emotes.forEach((emote, index) => {
-                    const button = document.createElement('button');
-                    button.textContent = emote.Emotion;
-                    button.className = 'filter-button';
-                    button.style.backgroundColor = emote.hex || '#007bff'; // Default color
-                    // Set opacity based on intensity (1 -> 0.2, 5 -> 1.0)
-                    const intensity = emote.Intensity || 1; // Default intensity 1
-                    button.style.opacity = Math.min(1, Math.max(0.2, intensity / 5));
+                const categories = {};
 
-                    button.addEventListener('click', () => toggleSelection(button, index));
-                    buttonContainer.appendChild(button);
+                // Group emotions by category
+                emotes.forEach(emote => {
+                    if (!categories[emote.Category]) {
+                        categories[emote.Category] = [];
+                    }
+                    categories[emote.Category].push(emote);
+                });
+
+                // Create a section for each category
+                Object.keys(categories).forEach(category => {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'category';
+                    categoryDiv.innerHTML = `<h2>${category}</h2>`;
+
+                    categories[category].forEach((emote, index) => {
+                        const button = document.createElement('button');
+                        button.textContent = emote.Emotion;
+                        button.className = 'filter-button';
+                        button.style.backgroundColor = emote.hex || '#007bff';
+                        button.style.opacity = Math.min(1, Math.max(0.2, (emote.Intensity || 1) / 5));
+
+                        button.addEventListener('click', () => toggleSelection(button, index));
+                        categoryDiv.appendChild(button);
+                    });
+
+                    categoryContainer.appendChild(categoryDiv);
                 });
             })
             .catch(error => console.error('Error loading emotes:', error));
 
         function toggleSelection(button, id) {
             if (selectedButtons.includes(id)) {
-                // Deselect button
                 selectedButtons = selectedButtons.filter(btnId => btnId !== id);
                 button.classList.remove('selected');
             } else if (selectedButtons.length < maxSelections) {
-                // Select button
                 selectedButtons.push(id);
                 button.classList.add('selected');
             } else {
