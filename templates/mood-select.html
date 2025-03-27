@@ -15,32 +15,44 @@
     fetch('/static/notebooks/emotes.json')
         .then(response => response.json())
         .then(emotes => {
-            const categories = {};
+            const colorGroups = {};
 
+            // Group emotions by hex color
             emotes.forEach(emote => {
-                if (!categories[emote.Category]) {
-                    categories[emote.Category] = [];
+                const hex = emote.hex || '#007bff'; // Default color if hex is missing
+                if (!colorGroups[hex]) {
+                    colorGroups[hex] = [];
                 }
-                categories[emote.Category].push(emote);
+                colorGroups[hex].push(emote);
             });
 
-            Object.keys(categories).forEach(category => {
-                const categoryDiv = document.createElement('div');
-                categoryDiv.className = 'category';
-                categoryDiv.innerHTML = `<h2>${category}</h2>`;
+            // Create a section for each color group
+            Object.keys(colorGroups).forEach(hex => {
+                // Create a new colorGroupDiv for each hex group
+                const colorGroupDiv = document.createElement('div');
+                colorGroupDiv.className = 'color-group';
 
-                categories[category].forEach((emote, index) => {
+                // Create a buttonGroup for the buttons in this color group
+                const buttonGroup = document.createElement('div');
+                buttonGroup.className = 'button-group';
+
+                // Add buttons to the buttonGroup
+                colorGroups[hex].forEach((emote, index) => {
                     const button = document.createElement('button');
                     button.textContent = emote.Emotion;
                     button.className = 'filter-button';
-                    button.style.backgroundColor = emote.hex || '#007bff';
+                    button.style.backgroundColor = hex;
                     button.style.opacity = Math.min(1, Math.max(0.2, (emote.Intensity || 1) / 5));
 
                     button.addEventListener('click', () => toggleSelection(button, index));
-                    categoryDiv.appendChild(button);
+                    buttonGroup.appendChild(button); // Append button to buttonGroup
                 });
 
-                categoryContainer.appendChild(categoryDiv);
+                // Append the buttonGroup to the colorGroupDiv
+                colorGroupDiv.appendChild(buttonGroup);
+
+                // Append the colorGroupDiv to the categoryContainer
+                categoryContainer.appendChild(colorGroupDiv);
             });
         })
         .catch(error => console.error('Error loading emotes:', error));

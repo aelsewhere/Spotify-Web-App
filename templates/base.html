@@ -12,7 +12,6 @@
     <!-- Header -->
     <header id="header">
         <div class="toolbar">
-            <h1 class="logo"><a href="{{ url_for('home') }}">Spotify</a></h1>
             <!-- Home Button -->
             <a href="{{ url_for('home') }}" class="icon-placeholder">
                 <i class="fas fa-home"></i>
@@ -25,7 +24,7 @@
     </header>
 
     <!-- Main Content -->
-    <main>
+    <main style="margin-top: 3em;">
         {% block content %}{% endblock %}
     </main>
 

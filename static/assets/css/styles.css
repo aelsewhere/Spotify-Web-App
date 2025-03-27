@@ -127,19 +127,25 @@ body.homepage.is-preload #header:after {
 
 /* Toolbar Styles for Non-Homepage Pages */
 body:not(.homepage) #header {
-    background-color: #333; /* Dark background for the toolbar */
-    color: #fff; /* White text */
-    padding: 0.5em 1em; /* Smaller padding for compactness */
-    position: fixed; /* Sticks to the top of the page */
+    background-color: #333; 
+    color: #fff; 
+    padding: 0.5em 1em; 
+    position: fixed; 
     top: 0;
     left: 0;
-    width: 100%; /* Full width */
-    height: 3.5em; /* Set a fixed height for the toolbar */
+    width: 100%; 
+    height: 3.5em; 
     z-index: 1000; /* Ensures it stays above other elements */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
     display: flex; /* Use flexbox for layout */
-    align-items: center; /* Vertically center content */
+    align-items: center; 
     justify-content: flex-start; /* Align items to the left */
+    gap: 1em; /* Add spacing between buttons */
+}
+
+/* Center the buttons inside the toolbar */
+body:not(.homepage) #header .toolbar {
+    display: flex;
     gap: 1em; /* Add spacing between buttons */
 }
 
@@ -165,7 +171,7 @@ body:not(.homepage) #header .icon-placeholder:hover {
 
 /* Add Padding Between Toolbar and Page Titles */
 body:not(.homepage) main {
-    padding-top: 5em; /* Adjust based on the height of the toolbar */
+    padding-top: 6em; /* Adjust based on the height of the toolbar */
 }
 
 /* Typography */
@@ -261,7 +267,7 @@ ul {
 }
 
 /* Layout for Mood Selection */
-.category-container {
+#categoryContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
     gap: 20px;
@@ -272,12 +278,28 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .category h2 {
     margin-bottom: 10px;
     font-size: 1.2em;
     text-align: center;
+    color: #333;
+}
+
+/* Button group within a category */
+.button-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive grid */
+    gap: 1em; 
+    width: 100%; 
 }
 
 /* Copy and customize button styles */
@@ -415,9 +437,10 @@ ul.icons li a:hover {
 #footer {
     position: relative;
     overflow: hidden;
-    padding: 6em 0 6em 0;
-    background: #483949;
-    color: #fff;
+    padding: 2em 1em; /* Add padding inside the footer */
+    margin-top: 3em; /* Add space between the content and the footer */
+    background-color: #333; /* Footer background color */
+    color: #fff; /* Footer text color */
     text-align: center;
 }
 
@@ -479,8 +502,12 @@ section.contact p {
     margin-bottom: 1.5em;
 }
 
+/* Add padding to the main content */
 main {
-    padding-top: 4em; /* Adjust based on the new height of the header */
+    padding: 5em 1em; /* 5em top and bottom, 1em left and right */
+    margin: 0 auto; /* Center the content horizontally */
+    max-width: 1200px; /* Optional: Limit the width of the content */
+    box-sizing: border-box; /* Include padding in the width calculation */
 }
 
 body:not(.homepage) main {
