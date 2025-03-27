@@ -6,3 +6,6 @@
 # ignore eda
 notebooks/eda.ipynb
 notebooks/spotify_eda.ipynb
+
+# ignore cache
+.cache
