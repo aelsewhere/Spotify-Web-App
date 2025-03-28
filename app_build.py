@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, redirect, url_for, session
+from flask import Flask, render_template, jsonify, redirect, url_for, session, request
 from scripts.auth import authenticate
 
 
@@ -94,6 +94,12 @@ def logout():
     session.clear()
     return redirect(url_for('home'))
 
+@build_v1.route('/mood-select')
 @build_v1.route('/mood-select.html')
 def mood_select():
     return render_template('mood-select.html')
+
+@build_v1.route('/mood-generate')
+def mood_generate():
+    moods = request.args.get('moods', '').split(',') if request.args.get('moods') else []
+    return render_template('mood-generate.html', moods=moods)

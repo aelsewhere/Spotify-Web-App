@@ -5,7 +5,13 @@
 {% block content %}
 <div class="container">
     <h1>Select Your Mood</h1>
-    <div id="categoryContainer"></div> <!-- The JavaScript will populate this container -->
+    <div id="categoryContainer"></div> 
+    <div id="selectedMoods">
+        <h2>Selected Moods:</h2>
+        <ul id="selectedMoodsList"></ul>
+    </div>
+    <button id="clearButton" class="clear-button" disabled>Clear</button> 
+    <button id="goButton" class="go-button" disabled>Go</button> <!-- Initially disabled -->
 </div>
 <script>
     const categoryContainer = document.getElementById('categoryContainer');
@@ -39,6 +45,20 @@
         '#17A9E0': { column: 2, order: 6 },
     };
 
+    const maxSelections = 3; // Maximum number of buttons the user can select
+    let selectedButtons = []; // Array to track selected buttons
+
+    const selectedMoodsList = document.getElementById('selectedMoodsList');
+    const goButton = document.getElementById('goButton'); 
+
+    const clearButton = document.getElementById('clearButton');
+    clearButton.addEventListener('click', () => {
+        selectedButtons.forEach(button => button.classList.remove('selected'));
+        selectedButtons = []; 
+        selectedMoodsList.innerHTML = ''; 
+        goButton.disabled = true; // Disable the "Go" button
+    });
+
     fetch('/static/notebooks/emotes.json')
         .then(response => response.json())
         .then(emotes => {
@@ -50,6 +70,7 @@
                 if (!colorGroups[hex]) {
                     colorGroups[hex] = [];
                 }
+                emote.Emotion = emote.Emotion.trim();
                 colorGroups[hex].push(emote);
             });
 
@@ -68,18 +89,59 @@
                     button.className = 'filter-button';
                     button.style.backgroundColor = hex;
                     button.style.opacity = Math.min(1, Math.max(0.2, (emote.Intensity || 1) / 5));
-                    button.addEventListener('click', () => toggleSelection(button));
-                    buttonGroup.appendChild(button);
+
+                    // Add click event to handle selection
+                    button.addEventListener('click', () => {
+                        if (selectedButtons.includes(button)) {
+                            button.classList.remove('selected');
+                            selectedButtons = selectedButtons.filter(b => b !== button);
+                        } else {
+                            if (selectedButtons.length < maxSelections) {
+                                button.classList.add('selected');
+                                selectedButtons.push(button);
+                            } else {
+                                alert(`You can only select up to ${maxSelections} moods.`);
+                            }
+                        }
+
+                        // Update the selected moods list
+                        selectedMoodsList.innerHTML = '';
+                        selectedButtons.forEach(b => {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = b.textContent;
+                            selectedMoodsList.appendChild(listItem);
+                        });
+
+                        const hasSelections = selectedButtons.length > 0;
+                        goButton.disabled = !hasSelections;
+                        clearButton.disabled = !hasSelections;
+                    });
+
+                    buttonGroup.appendChild(button); // Append button to buttonGroup
                 });
 
                 colorGroupDiv.appendChild(buttonGroup);
-
                 const position = groupPositioning[hex] || { column: 0, order: 0 };
-                console.log(`Hex: ${hex}, Column: ${position.column}, Order: ${position.order}`);
                 colorGroupDiv.style.order = position.order;
                 columns[position.column].appendChild(colorGroupDiv);
             });
         })
         .catch(error => console.error('Error loading emotes:', error));
+
+    // Add a click event listener to the "Go" button
+    goButton.addEventListener('click', () => {
+        if (selectedButtons.length > 0) {
+            const selectedMoods = selectedButtons.map(button => button.textContent).join(',');
+            window.location.href = `/mood-generate?moods=${encodeURIComponent(selectedMoods)}`; 
+        }
+    });
+
+    clearButton.addEventListener('click', () => {
+        selectedButtons.forEach(button => button.classList.remove('selected'));
+        selectedButtons = []; // Clear the selected buttons array
+        selectedMoodsList.innerHTML = ''; // Clear the displayed moods list
+        goButton.disabled = true; // Disable the "Go" button
+    });
+
 </script>
 {% endblock %}

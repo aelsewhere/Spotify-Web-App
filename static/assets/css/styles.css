@@ -243,7 +243,9 @@ ul {
 }
 
 .filter-button.selected {
-    border: 2px solid #000;
+    border: 2px solid #000; /* Add a border to indicate selection */
+    transform: scale(1.1); /* Slightly enlarge the button */
+    background-color: #ef8376; /* Change background color */
 }
 
 .button {
@@ -320,7 +322,9 @@ ul {
 }
 
 .filter-button.selected {
-    border: 2px solid #000;
+    border: 2px solid #000; /* Add a border to indicate selection */
+    transform: scale(1.1); /* Slightly enlarge the button */
+    background-color: #ef8376; /* Change background color */
 }
 
 /* Icons */
@@ -523,4 +527,53 @@ main {
     min-width: 300px;
     max-width: 48%;
     box-sizing: border-box;
+}
+
+.go-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: rgb(17, 50, 100);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.go-button:disabled {
+  background-color: #ccc; /* Grey out the button when disabled */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+}
+.go-button:hover:not(:disabled) {
+  background-color: #ef8376; /* Hover effect */
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.clear-button {
+  position: fixed;
+  bottom: 20px;
+  left: 40%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: rgb(17, 50, 100);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.clear-button:disabled {
+  background-color: #ccc; /* Grey out the button when disabled */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+}
+
+.clear-button:hover:not(:disabled) {
+  background-color: #ef8376; /* Hover effect */
+  transform: scale(1.05); /* Slight zoom on hover */
 }
