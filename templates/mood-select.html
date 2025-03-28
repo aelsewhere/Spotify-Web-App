@@ -9,61 +9,75 @@
 </div>
 <script>
     const categoryContainer = document.getElementById('categoryContainer');
-    const maxSelections = 3;
-    let selectedButtons = [];
+
+    // Create 3 columns
+    const columns = [document.createElement('div'), document.createElement('div'), document.createElement('div')];
+    columns.forEach(column => {
+        column.className = 'column'; // Add a class for styling
+        categoryContainer.appendChild(column); // Append each column to the container
+    });
+
+    // Define the desired column and order for each hex group
+    const groupPositioning = {
+        '#E71881': { column: 0, order: 1 },
+        '#D15DBF': { column: 1, order: 1 },
+        '#DD7594': { column: 2, order: 1 },
+        '#DA41A5': { column: 0, order: 2 },
+        '#CE71C7': { column: 1, order: 2 },
+        '#E77776': { column: 2, order: 2 },
+        '#D359BB': { column: 0, order: 3 },
+        '#D974A5': { column: 1, order: 3 },
+        '#EE795E': { column: 2, order: 3 },
+        '#CC6FCF': { column: 0, order: 4 },
+        '#E27685': { column: 1, order: 4 },
+        '#C38477': { column: 2, order: 4 },
+        '#D974A6': { column: 0, order: 5 },
+        '#ED7965': { column: 1, order: 5 },
+        '#6698AF': { column: 2, order: 5 },
+        '#E1768D': { column: 0, order: 6 },
+        '#CE8170': { column: 1, order: 6 },
+        '#17A9E0': { column: 2, order: 6 },
+    };
 
     fetch('/static/notebooks/emotes.json')
         .then(response => response.json())
         .then(emotes => {
             const colorGroups = {};
-            const gridAreaIds = [
-                'lovingpink', 'acceptingpink', 'tenderpink',
-                'joypink', 'courageouspurple', 'hopefulpink',
-                'curiouspink', 'gratefulpink', 'numborange',
-                'doubtpurple', 'stressedorange', 'guiltbrown',
-                'powerlesspink', 'angryorange', 'shameblue',
-                'fragilepink', 'fearbrown', 'sadblue'
-            ];
 
             // Group emotions by hex color
             emotes.forEach(emote => {
-                const hex = emote.hex || '#007bff'; // Default color if hex is missing
+                const hex = emote.hex.trim() || '#007bff'; // Trim spaces and use default color if hex is missing
                 if (!colorGroups[hex]) {
                     colorGroups[hex] = [];
                 }
                 colorGroups[hex].push(emote);
             });
 
-            // Create a section for each color group
-            Object.keys(colorGroups).forEach((hex, index) => {
-                // Create a new colorGroupDiv for each hex group
+            // Assign groups to specific columns and order based on the mapping
+            Object.keys(colorGroups).forEach(hex => {
                 const colorGroupDiv = document.createElement('div');
                 colorGroupDiv.className = 'color-group';
-
-                // Assign a grid-area id from the predefined list
                 colorGroupDiv.id = `hex${hex.replace('#', '')}`; // Prefix with "hex" and remove "#"
 
-                // Create a buttonGroup for the buttons in this color group
                 const buttonGroup = document.createElement('div');
                 buttonGroup.className = 'button-group';
 
-                // Add buttons to the buttonGroup
                 colorGroups[hex].forEach(emote => {
                     const button = document.createElement('button');
                     button.textContent = emote.Emotion;
                     button.className = 'filter-button';
                     button.style.backgroundColor = hex;
                     button.style.opacity = Math.min(1, Math.max(0.2, (emote.Intensity || 1) / 5));
-
                     button.addEventListener('click', () => toggleSelection(button));
-                    buttonGroup.appendChild(button); // Append button to buttonGroup
+                    buttonGroup.appendChild(button);
                 });
 
-                // Append the buttonGroup to the colorGroupDiv
                 colorGroupDiv.appendChild(buttonGroup);
 
-                // Append the colorGroupDiv to the categoryContainer
-                categoryContainer.appendChild(colorGroupDiv);
+                const position = groupPositioning[hex] || { column: 0, order: 0 };
+                console.log(`Hex: ${hex}, Column: ${position.column}, Order: ${position.order}`);
+                colorGroupDiv.style.order = position.order;
+                columns[position.column].appendChild(colorGroupDiv);
             });
         })
         .catch(error => console.error('Error loading emotes:', error));
