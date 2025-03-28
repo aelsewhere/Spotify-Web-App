@@ -128,7 +128,7 @@ body.homepage.is-preload #header:after {
 
 /* Toolbar Styles for Non-Homepage Pages */
 body:not(.homepage) #header {
-    background-color: #333; 
+    background-color: #fdbdec; 
     color: #fff; 
     padding: 0.5em 1em; 
     position: fixed; 
@@ -440,7 +440,7 @@ ul.icons li a:hover {
     overflow: hidden;
     padding: 2em 1em; /* Add padding inside the footer */
     margin-top: 3em; /* Add space between the content and the footer */
-    background-color: #333; /* Footer background color */
+    background-color: #fdbdec; /* Footer background color */
     color: #fff; /* Footer text color */
     text-align: center;
 }
