@@ -96,7 +96,7 @@ body.homepage #header footer {
 
 body.homepage #header:after {
     content: '';
-    background: #067226;
+    background: #1ed760;
     display: block;
     position: absolute;
     left: 0;
@@ -272,22 +272,90 @@ ul {
 #categoryContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-template-rows: auto;
+    grid-template-areas:
+        "hexE71881 hexD15DBF hexDD7594"
+        "hexDA41A5 hexCE71C7 hexE77776"
+        "hexD359BB hexD974A5 hexEE795E"
+        "hexCC6FCF hexE27685 hexC38477"
+        "hexD974A6 hexED7965 hex6698AF"
+        "hexE1768D hexCE8170 hex17A9E0";
     gap: 20px;
     padding: 20px;
 }
 
-.category {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
+#hexE71881 {
+    grid-area: hexE71881;
 }
+
+#hexD15DBF {
+    grid-area: hexD15DBF;
+}
+
+#hexDD7594 {
+    grid-area: hexDD7594;
+}
+
+#hexDA41A5 {
+    grid-area: hexDA41A5;
+}
+
+#hexCE71C7 {
+    grid-area: hexCE71C7;
+}
+
+#hexE77776 {
+    grid-area: hexE77776;
+}
+
+#hexD359BB {
+    grid-area: hexD359BB;
+}
+
+#hexD974A5 {
+    grid-area: hexD974A5;
+}
+
+#hexEE795E {
+    grid-area: hexEE795E;
+}
+
+#hexCC6FCF {
+    grid-area: hexCC6FCF;
+}
+
+#hexE27685 {
+    grid-area: hexE27685;
+}
+
+#hexC38477 {
+    grid-area: hexC38477;
+}
+
+#hexD974A6 {
+    grid-area: hexD974A6;
+}
+
+#hexED7965 {
+    grid-area: hexED7965;
+}
+
+#hex6698AF {
+    grid-area: hex6698AF;
+}
+
+#hexE1768D {
+    grid-area: hexE1768D;
+}
+
+#hexCE8170 {
+    grid-area: hexCE8170;
+}
+
+#hex17A9E0 {
+    grid-area: hex17A9E0;
+}
+
 
 .category h2 {
     margin-bottom: 10px;
@@ -298,9 +366,10 @@ ul {
 
 /* Button group within a category */
 .button-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive grid */
-    gap: 1em; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
     width: 100%; 
 }
 
@@ -524,3 +593,4 @@ main {
     min-width: 300px;
     max-width: 48%;
     box-sizing: border-box;
+}
