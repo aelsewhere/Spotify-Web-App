@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Generated Moods{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Your Selected Moods</h1>
+    <ul>
+        {% if moods %}
+            {% for mood in moods %}
+                <li>{{ mood }}</li>
+            {% endfor %}
+        {% else %}
+            <li>No moods selected.</li>
+        {% endif %}
+    </ul>
+    <button onclick="window.location.href='/mood-select'">Back to Mood Select</button> <!-- Button to go back -->
+</div>
+{% endblock %}
