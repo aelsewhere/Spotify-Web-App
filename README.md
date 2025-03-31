@@ -15,6 +15,14 @@ That’s where this app comes in. The whole idea is to make a Monthly Top 50 gen
 
 
 ### Mood-Generated Playlists
+
+Another cool feature of the site is the mood-based playlist builder. Instead of just picking a genre or artist, you can create a playlist based on how you're feeling. There are hundreds of moods to choose from, and you can select up to three at a time to really fine-tune the vibe you're going for.  
+
+To make it even more intuitive, moods are organized by color—18 different colors representing different emotional categories. Within each color, the intensity of the mood is shown through opacity, so you can easily find the right match for how you’re feeling in the moment.  
+
+Once you’ve chosen your moods and set the playlist length, the algorithm gets to work. Using your Spotify listening history, it pulls together a playlist that not only matches your mood but also fits your personal taste. Whether you need something chill for a rainy day, energetic for a workout, or nostalgic for a late-night drive, the mood-based builder makes sure you always have the perfect soundtrack.
+
+
 Pick 1-3 moods to generate a personalized Spotify playlist. Mood emotions gathered from [The Hoffman Institute](https://www.hoffmaninstitute.org/wp-content/uploads/Practices-FeelingsSensations.pdf).
 
 Example of emotions storage:
@@ -30,4 +38,4 @@ There are 18 umbrella categories:
 
 Accepting, Joy, Angry, Courageous, Loving, Curious, Sad, Numb, Shame, Fear, Fragile, Grateful, Guilt, Hopeful, Powerless, Tender, Stressed, Doubt
 
-### Media-Generated Playlist
+### Media-Generated Playlist *coming soon!*
