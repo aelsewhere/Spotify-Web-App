@@ -28,23 +28,6 @@ Emotion column is straightforward. Family 1 is the general umbrella the emotion 
 
 There are 18 umbrella categories:
 
-* Accepting
-* Joy
-* Angry
-* Courageous
-* Loving
-* Curious
-* Sad
-* Numb
-* Shame
-* Fear
-* Fragile
-* Grateful
-* Guilt
-* Hopeful
-* Powerless
-* Tender
-* Stressed
-* Doubt
+Accepting, Joy, Angry, Courageous, Loving, Curious, Sad, Numb, Shame, Fear, Fragile, Grateful, Guilt, Hopeful, Powerless, Tender, Stressed, Doubt
 
-### Song-Generated Playlist
+### Media-Generated Playlist
