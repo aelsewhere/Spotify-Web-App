@@ -39,3 +39,8 @@ There are 18 umbrella categories:
 Accepting, Joy, Angry, Courageous, Loving, Curious, Sad, Numb, Shame, Fear, Fragile, Grateful, Guilt, Hopeful, Powerless, Tender, Stressed, Doubt
 
 ### Media-Generated Playlist *coming soon!*
+
+
+Coming soon: a playlist generator inspired by your favorite movies, TV shows, books, and more! Instead of just making a playlist based on a mood or genre, this feature lets you create one that captures the essence of your favorite stories.  
+
+The playlist pulls songs from your own listening history, blending them with tracks featured in the media itself. If a movie or show has an iconic soundtrack, those songs can be added too—along with music from similar films, shows, or books that share the same vibe. Whether you want the moody atmosphere of your favorite sci-fi series or the upbeat energy of a classic coming-of-age film, this generator helps bring your favorite stories to life through music.
