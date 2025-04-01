@@ -1,7 +1,30 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* Global Colors */
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+:root {
+    --primary-color: #413C58; 
+    --primary-color-light: #645b86;
+    --secondary-color: #F98BCF; 
+    --disabled-color: #DDDBE6; 
+    --background-color: #F6EFEE;
+    --text-color: #5b5b5b;
+    --text-color-light: white;
+    --shadow-color: rgba(192, 192, 192, 0.35);
+}
 
-/* Global Resets */
+
+
+
+
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* Global Reset */
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -21,12 +44,103 @@ audio, video {
     vertical-align: baseline;
 }
 
+
+
+
+
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* Utility Classes */
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+
+.hidden {
+    display: none;
+}
+
+.center {
+    text-align: center;
+}
+
+.aln-center {
+    justify-content: center;
+}
+
+
+
+
+
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* General Body Styles */
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+body:not(.homepage) main {
+    padding-top: 6em; /* Adjust based on the height of the toolbar */
+}
+
 body {
     line-height: 1.85em;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 300;
-    background: #f0f4f4;
-    color: #5b5b5b;
+    background: var(--background-color);
+    color: var(--text-color);
+}
+
+main {
+    padding: 5em 1em; 
+    margin: 0 auto; 
+    max-width: 1200px; 
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.widget-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.widget {
+    flex:1;
+    min-width: 300px;
+    max-width: 48%;
+    box-sizing: border-box;
+}
+
+ul.icons {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+ul.icons li {
+    display: inline-block;
+}
+
+ul.icons li a {
+    color: var(--text-color-light);
+    font-size: 1.5em;
+    transition: color 0.3s ease;
+}
+
+ul.icons li a:hover {
+    color: var(--secondary-color);
+}
+
+@media screen and (max-width: 960px) {
+    .container {
+        width: 100%;
+    }
+}
+
+#header {
+    color: white;
+    padding: 20px 0;
+    text-align: center;
 }
 
 body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -35,53 +149,135 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 }
 
 
-/* Logo */
-#header .logo {
-    font-size: 1.2em; /* Smaller font size for the logo */
-    font-weight: bold;
-    margin: 0;
+
+
+
+
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* Wrapper Styling */
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+.wrapper {
+    background: var(--background-color);
+    margin: 0 0 2em 0;
+    padding: 6em 0 6em 0;
 }
 
-#header .logo a {
-    color: #fff;
+.wrapper.style2 {
+    padding-top: 0;
+}
+
+
+
+
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* Container Styling */
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+.container {
+    margin: 0 auto;
+    max-width: 100%;
+    width: 1400px;
+}
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1;
+    min-width: 300px; /* Minimum width for cards */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px; /* Optional: Add spacing between cards */
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 30px;
+    gap: 20px;
+    flex-wrap: wrap; /* Optional: Ensure cards wrap on smaller screens */
+}
+
+
+
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* Typography */
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    color: var(--text-color);
+    line-height: 1.25em;
+}
+
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+p {
+    line-height: 1.85em;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    color: var(--text-color);
+}
+
+a {
+    color: inherit;
     text-decoration: none;
+    border-bottom: solid 1px var(--shadow-color);
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
-/* Icon Placeholder */
-#header .icon-placeholder {
-    font-size: 1.5em; /* Icon size */
-    color: #fff;
-    text-decoration: none;
+a:hover {
+    color: var(--secondary-color);
+    border-bottom-color: var(--secondary-color);
 }
 
-#header .icon-placeholder:hover {
-    color: #ef8376; /* Hover effect for the icon */
+blockquote {
+    border-left: solid 0.5em var(--primary-color-light);
+    padding: 1em 0 1em 2em;
+    font-style: italic;
+}
+
+ul {
+    list-style: disc;
+    padding-left: 1em;
 }
 
 
 
-/* Full-Page Header for Homepage */
+
+
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* Homepage Styling */
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
 body.homepage #header {
     height: 50vh; /* Set the height to 50% of the viewport height */
     display: flex;
-    align-items: center; /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
+    align-items: center; 
+    justify-content: center; 
     text-align: center;
-    color: white;
-    background: #413C58;
-}
-
-@keyframes slidingGradient {
-    0% {
-        background-position: 0% 50%; /* Start at the left */
-    }
-    100% {
-        background-position: -100% 50%; /* Slide to the left */
-    }
+    color: var(--text-color-light);
+    background: var(--primary-color);
 }
 
 body.homepage #header h1 {
-    color: #fff;
+    color: var(--text-color-light);
     font-size: 4em;
     margin-bottom: 0.5em;
 }
@@ -89,26 +285,12 @@ body.homepage #header h1 {
 body.homepage #header hr {
     top: 1.5em;
     margin-bottom: 3em;
-    border-bottom-color: rgba(192, 192, 192, 0.35);
-    box-shadow: inset 0 1px 0 0 rgba(192, 192, 192, 0.35);
+    border-bottom-color: var(--primary-color);
+    box-shadow: inset 0 1px 0 0 var(--shadow-color);
 }
 
 body.homepage #header footer {
     margin: 1em 0 0 0;
-}
-
-body.homepage #header:after {
-    content: '';
-    background: #413C58;
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 2.5s ease-in-out;
-    transition-delay: 0.5s;
 }
 
 body.homepage.is-preload #header:after {
@@ -130,10 +312,19 @@ body.homepage.is-preload #header:after {
     height: 100%;
 }
 
-/* Toolbar Styles for Non-Homepage Pages */
+
+
+
+
+
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* Main Header & Footer Styling */
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
 body:not(.homepage) #header {
-    background-color: #413C58; 
-    color: #fff; 
+    background-color: var(--primary-color);
+    color: var(--text-color-light); 
     padding: 0.5em 1em; 
     position: fixed; 
     top: 0;
@@ -141,122 +332,139 @@ body:not(.homepage) #header {
     width: 100%; 
     height: 3.5em; 
     z-index: 1000; /* Ensures it stays above other elements */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-    display: flex; /* Use flexbox for layout */
+    box-shadow: 0 2px 5px var(--shadow-color); 
+    display: flex; 
     align-items: center; 
-    justify-content: flex-start; /* Align items to the left */
-    gap: 1em; /* Add spacing between buttons */
+    justify-content: flex-start; 
+    gap: 1em; 
 }
 
-/* Center the buttons inside the toolbar */
 body:not(.homepage) #header .toolbar {
     display: flex;
-    gap: 1em; /* Add spacing between buttons */
+    gap: 1em; 
 }
 
-/* Icon Buttons */
 body:not(.homepage) #header .icon-placeholder {
     font-size: 1.5em; /* Icon size */
-    color: #fff;
+    color: var(--text-color-light); 
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.5em; /* Fixed width for buttons */
-    height: 2.5em; /* Fixed height for buttons */
+    width: 2.5em; 
+    height: 2.5em; 
     border-radius: 50%; /* Circular buttons */
-    background-color: #444; /* Button background color */
+    background-color: var(--primary-color-light);
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 body:not(.homepage) #header .icon-placeholder:hover {
-    background-color: #ef8376; /* Hover effect */
+    background-color: var(--secondary-color); 
     transform: scale(1.1); /* Slight zoom on hover */
 }
 
-/* Add Padding Between Toolbar and Page Titles */
-body:not(.homepage) main {
-    padding-top: 6em; /* Adjust based on the height of the toolbar */
+#header .logo {
+    font-size: 1.2em; 
+    font-weight: bold;
+    margin: 0;
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 400;
-    color: #483949;
-    line-height: 1.25em;
-}
-
-h1 {
-    font-size: 2.5em;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-h2 {
-    font-size: 1.5em;
-    color: #5b5b5b;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-p {
-    line-height: 1.85em;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 300;
-    color: #5b5b5b;
-}
-
-a {
-    color: inherit;
+#header .logo a {
+    color: var(--text-color-light);
     text-decoration: none;
-    border-bottom: solid 1px rgba(128, 128, 128, 0.2);
-    transition: color 0.3s ease, border-bottom-color 0.3s ease;
 }
 
-a:hover {
-    color: #ef8376;
-    border-bottom-color: #ef8376;
+#header .icon-placeholder {
+    font-size: 1.5em; 
+    color: #fff;
+    text-decoration: none;
 }
 
-blockquote {
-    border-left: solid 0.5em #ddd;
-    padding: 1em 0 1em 2em;
-    font-style: italic;
+#header .icon-placeholder:hover {
+    color: var(--secondary-color); /* Hover effect for the icon */
 }
 
-ul {
-    list-style: disc;
-    padding-left: 1em;
+#footer {
+    position: relative;
+    overflow: hidden;
+    padding: 2em 1em; 
+    margin-top: 3em; 
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    text-align: center;
 }
 
-/* Buttons */
-.filter-button {
-    padding: 10px 20px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #530ab2; /* Default background color */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin: 5px;
+#footer h3 {
+    color: var(--text-color-light);
+    font-size: 1.5em;
+    margin-bottom: 1em;
 }
 
-.filter-button:hover {
-    background-color: #ef8376; /* Hover effect */
-    transform: scale(1.05); /* Slight zoom on hover */
+#footer p {
+    color: var(--text-color-light);
+    font-size: 1em;
+    margin-bottom: 2em;
 }
 
-.filter-button.selected {
-    border: 2px solid #000; /* Add a border to indicate selection */
-    transform: scale(1.1); /* Slightly enlarge the button */
-    background-color: #ef8376; /* Change background color */
+#footer ul.icons {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
+#footer ul.icons li {
+    display: inline-block;
+}
+
+#footer ul.icons li a {
+    color: var(--text-color-light);
+    font-size: 1.5em;
+    transition: color 0.3s ease;
+}
+
+#footer ul.icons li a:hover {
+    color: var(--secondary-color);
+}
+
+#footer .copyright {
+    margin-top: 2em;
+    font-size: 0.8em;
+    color: var(--shadow-color);
+}
+
+section.contact {
+    margin-bottom: 2em;
+}
+
+section.contact h3 {
+    font-size: 1.5em;
+    color: var(--text-color-light);
+    margin-bottom: 0.5em;
+}
+
+section.contact p {
+    font-size: 1em;
+    color: var(--text-color-light);
+    margin-bottom: 1.5em;
+}
+
+
+
+
+
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* Button Styling */
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
 .button {
     display: inline-block;
     padding: 10px 20px;
-    color: white;
-    background-color: #530ab2;
+    color: var(--text-color-light);
+    background-color: var(--primary-color-light); 
     border-radius: 5px;
     text-align: center;
     text-decoration: none;
@@ -266,7 +474,7 @@ ul {
 }
 
 .button:hover {
-    background-color: #ef8376;
+    background-color: var(--secondary-color);
     transform: scale(1.05);
 }
 
@@ -275,18 +483,97 @@ ul {
     padding: 15px;
 }
 
-/* Layout for Mood Selection */
-#categoryContainer {
+.filter-button { /* Button styling for mood filters */
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--primary-color-light); 
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 5px;
+}
+
+.filter-button:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.filter-button.selected {
+    border: 2px solid #000; /* Add a border to indicate selection */
+    transform: scale(1.1); /* Slightly enlarge the button */
+    background-color: var(--secondary-color);
+}
+
+.go-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  font-size: 16px;
+  color: var(--text-color-light);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.go-button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+}
+.go-button:hover:not(:disabled) {
+  background-color: var(--secondary-color);
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.clear-button {
+  position: fixed;
+  bottom: 20px;
+  left: 40%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  font-size: 16px;
+  color: var(--text-color-light);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.clear-button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+}
+
+.clear-button:hover:not(:disabled) {
+  background-color: var(--secondary-color);
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+
+
+
+
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* Mood Selection Styling */
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+#categoryContainer { /* Layout for Mood Selection */
     display: flex;
-    gap: 20px; /* Space between columns */
-    justify-content: space-between; /* Distribute columns evenly */
+    gap: 20px; 
+    justify-content: space-between; 
 }
 
 .column {
-    flex: 1; /* Each column takes up equal space */
+    flex: 1; 
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    gap: 20px; /* Space between items in the column */
+    flex-direction: column; 
+    gap: 20px; 
 }
 
 .color-group {
@@ -299,11 +586,10 @@ ul {
     margin-bottom: 10px;
     font-size: 1.2em;
     text-align: center;
-    color: #333;
+    color: var(--text-color-light);
 }
 
-/* Button group within a category */
-.button-group {
+.button-group { /* Button group within a category */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -311,67 +597,7 @@ ul {
     width: 100%; 
 }
 
-/* Copy and customize button styles */
-.filter-button {
-    padding: 10px 20px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #530ab2; /* Default background color */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.filter-button:hover {
-    background-color: #ef8376; /* Hover effect */
-    transform: scale(1.05); /* Slight zoom on hover */
-}
-
-.filter-button.selected {
-    border: 2px solid #000; /* Add a border to indicate selection */
-    transform: scale(1.1); /* Slightly enlarge the button */
-    background-color: #ef8376; /* Change background color */
-}
-
-/* Icons */
-ul.icons {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-ul.icons li {
-    display: inline-block;
-}
-
-ul.icons li a {
-    color: #fff;
-    font-size: 1.5em;
-    transition: color 0.3s ease;
-}
-
-ul.icons li a:hover {
-    color: #ef8376;
-}
-
-/* Utility Classes */
-.hidden {
-    display: none;
-}
-
-.center {
-    text-align: center;
-}
-
-.aln-center {
-    justify-content: center;
-}
-
-/* Grid Layout */
-.row {
+.row { /* Grid Layout */
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
@@ -412,174 +638,4 @@ ul.icons li a:hover {
 
 .row > .col-12-mobile {
     width: 100%;
-}
-
-/* Container */
-.container {
-    margin: 0 auto;
-    max-width: 100%;
-    width: 1400px;
-}
-
-@media screen and (max-width: 960px) {
-    .container {
-        width: 100%;
-    }
-}
-
-/* Wrapper */
-.wrapper {
-    background: #fff;
-    margin: 0 0 2em 0;
-    padding: 6em 0 6em 0;
-}
-
-.wrapper.style2 {
-    padding-top: 0;
-}
-
-#header {
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-
-/* Footer */
-#footer {
-    position: relative;
-    overflow: hidden;
-    padding: 2em 1em; /* Add padding inside the footer */
-    margin-top: 3em; /* Add space between the content and the footer */
-    background-color: #413C58; /* Footer background color */
-    color: #fff; /* Footer text color */
-    text-align: center;
-}
-
-#footer h3 {
-    color: #fff;
-    font-size: 1.5em;
-    margin-bottom: 1em;
-}
-
-#footer p {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 1em;
-    margin-bottom: 2em;
-}
-
-#footer ul.icons {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-#footer ul.icons li {
-    display: inline-block;
-}
-
-#footer ul.icons li a {
-    color: #fff;
-    font-size: 1.5em;
-    transition: color 0.3s ease;
-}
-
-#footer ul.icons li a:hover {
-    color: #ef8376;
-}
-
-#footer .copyright {
-    margin-top: 2em;
-    font-size: 0.8em;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-/* Contact Section */
-section.contact {
-    margin-bottom: 2em;
-}
-
-section.contact h3 {
-    font-size: 1.5em;
-    color: #fff;
-    margin-bottom: 0.5em;
-}
-
-section.contact p {
-    font-size: 1em;
-    color: rgba(255, 255, 255, 0.75);
-    margin-bottom: 1.5em;
-}
-
-/* Add padding to the main content */
-main {
-    padding: 5em 1em; 
-    margin: 0 auto; 
-    max-width: 1200px; 
-    box-sizing: border-box; /* Include padding in the width calculation */
-}
-
-.widget-container {
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.widget {
-    flex:1;
-    min-width: 300px;
-    max-width: 48%;
-    box-sizing: border-box;
-}
-
-.go-button {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  font-size: 16px;
-  color: white;
-  background-color: rgb(17, 50, 100);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.go-button:disabled {
-  background-color: #ccc; /* Grey out the button when disabled */
-  cursor: not-allowed; /* Change cursor to indicate disabled state */
-}
-.go-button:hover:not(:disabled) {
-  background-color: #ef8376; /* Hover effect */
-  transform: scale(1.05); /* Slight zoom on hover */
-}
-
-.clear-button {
-  position: fixed;
-  bottom: 20px;
-  left: 40%;
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  font-size: 16px;
-  color: white;
-  background-color: rgb(17, 50, 100);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.clear-button:disabled {
-  background-color: #ccc; /* Grey out the button when disabled */
-  cursor: not-allowed; /* Change cursor to indicate disabled state */
-}
-
-.clear-button:hover:not(:disabled) {
-  background-color: #ef8376; /* Hover effect */
-  transform: scale(1.05); /* Slight zoom on hover */
 }
