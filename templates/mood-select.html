@@ -5,13 +5,13 @@
 {% block content %}
 <div class="container">
     <h1>Select Your Mood</h1>
-    <div id="categoryContainer"></div> 
-    <div id="selectedMoods">
-        <h2>Selected Moods:</h2>
+    <div id="selectedMoods" style="min-height: 50px;">
+        <h2 id="selectedMoodsHeader" style="display: none;">Selected Moods:</h2>
         <ul id="selectedMoodsList"></ul>
     </div>
+    <div id="categoryContainer"></div> 
     <button id="clearButton" class="clear-button" disabled>Clear</button> 
-    <button id="goButton" class="go-button" disabled>Go</button> <!-- Initially disabled -->
+    <button id="goButton" class="go-button" disabled>Go</button> 
 </div>
 <script>
     const categoryContainer = document.getElementById('categoryContainer');
@@ -49,6 +49,7 @@
     let selectedButtons = []; // Array to track selected buttons
 
     const selectedMoodsList = document.getElementById('selectedMoodsList');
+    const selectedMoodsHeader = document.getElementById('selectedMoodsHeader');
     const goButton = document.getElementById('goButton'); 
 
     const clearButton = document.getElementById('clearButton');
@@ -56,6 +57,7 @@
         selectedButtons.forEach(button => button.classList.remove('selected'));
         selectedButtons = []; 
         selectedMoodsList.innerHTML = ''; 
+        selectedMoodsHeader.style.display = 'none'; // Hide the header
         goButton.disabled = true; // Disable the "Go" button
     });
 
@@ -112,6 +114,9 @@
                             selectedMoodsList.appendChild(listItem);
                         });
 
+                        // Show or hide the header based on the number of selected moods
+                        selectedMoodsHeader.style.display = selectedButtons.length > 0 ? 'block' : 'none';
+
                         const hasSelections = selectedButtons.length > 0;
                         goButton.disabled = !hasSelections;
                         clearButton.disabled = !hasSelections;
@@ -140,6 +145,7 @@
         selectedButtons.forEach(button => button.classList.remove('selected'));
         selectedButtons = []; // Clear the selected buttons array
         selectedMoodsList.innerHTML = ''; // Clear the displayed moods list
+        selectedMoodsHeader.style.display = 'none'; // Hide the header
         goButton.disabled = true; // Disable the "Go" button
     });
 

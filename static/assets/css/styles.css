@@ -274,6 +274,7 @@ body.homepage #header {
     text-align: center;
     color: var(--text-color-light);
     background: var(--primary-color);
+    margin-bottom: 80;
 }
 
 body.homepage #header h1 {
