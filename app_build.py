@@ -94,6 +94,10 @@ def logout():
     session.clear()
     return redirect(url_for('home'))
 
+@build_v1.route('/about')
+def about():
+    return render_template('about.html')
+
 @build_v1.route('/mood-select')
 @build_v1.route('/mood-select.html')
 def mood_select():
@@ -102,4 +106,14 @@ def mood_select():
 @build_v1.route('/mood-generate')
 def mood_generate():
     moods = request.args.get('moods', '').split(',') if request.args.get('moods') else []
+    return render_template('mood-generate.html', moods=moods)
+
+@build_v1.route('/mood-generate.html')
+def mood_generate_html():
+    moods = request.args.get('moods', '').split(',') if request.args.get('moods') else []
+    return render_template('mood-generate.html', moods=[])
+
+@build_v1.route('/mood-generate/<moods>')
+def mood_generate_with_moods(moods):
+    moods = moods.split(',') if moods else []
     return render_template('mood-generate.html', moods=moods)
