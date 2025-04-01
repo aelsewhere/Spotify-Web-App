@@ -40,14 +40,35 @@
 						</header>
 						<p>
 							It will generate a playlist based on your mood.
-              Or it will generate a playlist based off favorite songs.
+              Or it will generate a playlist based off favorite shows.
               Or it will make a monthly top 50 playlist.
 						</p>
 						<footer>
-							<a href="#" class="button">Continue Reading</a>
+							<a href="{{ url_for('about') }}" class="button">Continue Reading</a>
 						</footer>
 					</article>
 
+				</div>
+
+				<!-- Cards Section -->
+				<div class="card-container" style="display: flex; justify-content: space-around; margin: 50px 0; padding: 20px;">
+					<!-- Monthly Top 50 Card -->
+					<div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 30%; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+						<h2>Monthly Top 50</h2>
+						<p>The platform's AI-powered Monthly Top 50 generator creates personalized playlists by analyzing users' Spotify listening data for any selected month. In addition to curating relevant tracks, the AI optimizes the song order for a cohesive listening experience, and users can retroactively generate playlists for past months, even if they were not manually tracking their music at the time.</p>
+					</div>
+
+					<!-- Mood Generator Card -->
+					<div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 30%; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+						<h2>Mood Generator</h2>
+						<p>The platform features a mood-based playlist builder that allows users to generate playlists tailored to their emotional state rather than selecting by genre or artist. With a selection of hundreds of moods categorized by 18 distinct colors and varying opacity levels to indicate intensity, the algorithm curates a personalized playlist by analyzing the user's Spotify listening history, ensuring a seamless and relevant musical experience.</p>
+					</div>
+
+					<!-- Media Generator Card -->
+					<div class="card" style="border: 1px solid #ddd; border-radius: 8px; padding: 20px; width: 30%; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+						<h2>Media Generator</h2>
+						<p>An upcoming feature will enable users to generate playlists inspired by their favorite movies, TV shows, books, and other media, creating a soundtrack that reflects the essence of these stories. By analyzing the user’s listening history and incorporating tracks featured in the selected media—along with related soundtracks and similar works—the algorithm curates a cohesive and immersive musical experience.</p>
+					</div>
 				</div>
 
 			<!-- Footer -->

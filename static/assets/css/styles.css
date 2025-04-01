@@ -62,18 +62,22 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 
 /* Full-Page Header for Homepage */
 body.homepage #header {
-    position: relative;
-    background-image: url("/static/images/header.png");
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    color: #fff;
+    height: 50vh; /* Set the height to 50% of the viewport height */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
     text-align: center;
-    padding: 7.5em 0 2em 0;
-    cursor: default;
-    height: 100vh; /* Full viewport height */
-    min-height: 40em;
-    margin-bottom: 2em;
+    color: white;
+    background: #413C58;
+}
+
+@keyframes slidingGradient {
+    0% {
+        background-position: 0% 50%; /* Start at the left */
+    }
+    100% {
+        background-position: -100% 50%; /* Slide to the left */
+    }
 }
 
 body.homepage #header h1 {
@@ -95,7 +99,7 @@ body.homepage #header footer {
 
 body.homepage #header:after {
     content: '';
-    background: #1ed760;
+    background: #413C58;
     display: block;
     position: absolute;
     left: 0;
@@ -128,7 +132,7 @@ body.homepage.is-preload #header:after {
 
 /* Toolbar Styles for Non-Homepage Pages */
 body:not(.homepage) #header {
-    background-color: #fdbdec; 
+    background-color: #413C58; 
     color: #fff; 
     padding: 0.5em 1em; 
     position: fixed; 
@@ -257,6 +261,8 @@ ul {
     text-align: center;
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    z-index: 10; /* Ensure the button is on top */
 }
 
 .button:hover {
@@ -444,7 +450,7 @@ ul.icons li a:hover {
     overflow: hidden;
     padding: 2em 1em; /* Add padding inside the footer */
     margin-top: 3em; /* Add space between the content and the footer */
-    background-color: #fdbdec; /* Footer background color */
+    background-color: #413C58; /* Footer background color */
     color: #fff; /* Footer text color */
     text-align: center;
 }
