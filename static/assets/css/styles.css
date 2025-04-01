@@ -476,6 +476,7 @@ section.contact p {
 .button:hover {
     background-color: var(--secondary-color);
     transform: scale(1.05);
+    color: var(--text-color-light);
 }
 
 .button.circled {
@@ -485,7 +486,7 @@ section.contact p {
 
 .filter-button { /* Button styling for mood filters */
     padding: 10px 20px;
-    color: white;
+    color: var(--text-color-light);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -496,20 +497,20 @@ section.contact p {
 
 .filter-button:hover {
     background-color: var(--secondary-color);
-    transform: scale(1.05); /* Slight zoom on hover */
+    transform: scale(1.1); /* Slight zoom on hover */
+    color: var(--text-color-light);
 }
 
 .filter-button.selected {
-    border: 2px solid #000; /* Add a border to indicate selection */
+    border: 2px solid var(--primary-color);
     transform: scale(1.1); /* Slightly enlarge the button */
     background-color: var(--secondary-color);
 }
 
-.go-button {
+.go-button { /* go button for mood-selection */
   position: fixed;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%);
   padding: 10px 20px;
   font-size: 16px;
   color: var(--text-color-light);
@@ -529,11 +530,10 @@ section.contact p {
   transform: scale(1.05); /* Slight zoom on hover */
 }
 
-.clear-button {
+.clear-button { /* clear button for mood-selection */
   position: fixed;
   bottom: 20px;
   left: 40%;
-  transform: translateX(-50%);
   padding: 10px 20px;
   font-size: 16px;
   color: var(--text-color-light);
