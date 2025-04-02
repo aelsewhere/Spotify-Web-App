@@ -6,6 +6,9 @@ from scripts.auth import authenticate
 build_v1 = Flask(__name__)
 build_v1.secret_key = 'kdjsfakjsdhfue9oweiuf8i'
 
+
+
+
 @build_v1.route('/')
 def home():
     return render_template('index.html')
@@ -91,7 +94,7 @@ def dashboard():
 
 @build_v1.route('/logout')
 def logout():
-    session.clear()
+    session.pop('access_token',None)
     return redirect(url_for('home'))
 
 @build_v1.route('/about')
@@ -130,3 +133,7 @@ def profile():
 @build_v1.route('/settings')
 def settings():
     return render_template('settings.html')
+
+@build_v1.route('/monthly-generate')
+def monthly_generate():
+    return render_template('monthly-generate.html')
