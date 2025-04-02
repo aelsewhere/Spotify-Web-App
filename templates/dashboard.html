@@ -40,23 +40,34 @@
         </div>
     </div>
 
-    <!-- Playback Widget -->
-    <div class="widget animate__animated animate__fadeIn playback-widget">
-        <h2 style="margin-right: 20px;"><i class="fas fa-volume-up"></i> Playback Controls</h2>
-        <div class="playback-controls">
-            <button id="playButton" class="button btn-primary">Play</button>
-            <button id="pauseButton" class="button btn-secondary">Pause</button>
-            <button id="nextButton" class="button btn-secondary">Next</button>
-            <button id="previousButton" class="button btn-secondary">Previous</button>
-        </div>
-
-    </div>
-
     <!-- Buttons Section -->
     <div class="button-container" style="text-align: center; margin-top: 30px;">
-    <a href="/previous-page" class="button btn-secondary">Monthly Top 50</a>
-    <a href="/mood-select" class="button btn-secondary">Mood Selection</a>
-    <a href="/media-select" class="button btn-disabled">Media Selection</a>
-</div>
+        <a href="/monthly-generate" class="button btn-secondary">Monthly Top 50</a>
+        <a href="/mood-select" class="button btn-secondary">Mood Selection</a>
+        <a href="/media-select" class="button btn-disabled">Media Selection</a>
+    </div>
+
+    <!-- Playback Widget -->
+    <div class="widget animate__animated animate__fadeIn playback-widget" style="display: flex; align-items: center; gap: 20px;">
+        <!-- Album Cover -->
+        <div class="album-cover">
+            <!-- Placeholder for album cover -->
+        </div>
+        <div>
+            <div class="song-info">
+                <h2 class="song-name" style="margin: 0;">Current Song Title</h2>
+                <p class="artist-name" style="margin: 0;">Current Song Artist</p>
+                <p class="album-name" style="margin: 0; font-style: italic;">Current Song Album</p>
+            </div>
+
+            <!-- Playback Controls -->
+            <div class="playback-controls" style="margin-top: 10px; display: flex; gap: 10px;">
+                <button id="playButton" class="button btn-primary">Play</button>
+                <button id="pauseButton" class="button btn-secondary">Pause</button>
+                <button id="nextButton" class="button btn-secondary">Next</button>
+                <button id="previousButton" class="button btn-secondary">Previous</button>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
