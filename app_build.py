@@ -117,3 +117,16 @@ def mood_generate_html():
 def mood_generate_with_moods(moods):
     moods = moods.split(',') if moods else []
     return render_template('mood-generate.html', moods=moods)
+
+@build_v1.route('/media-select')
+@build_v1.route('/media-select.html')
+def media_select():
+    return render_template('media-select.html')
+
+@build_v1.route('/profile')
+def profile():
+    return render_template('profile.html')
+
+@build_v1.route('/settings')
+def settings():
+    return render_template('settings.html')
