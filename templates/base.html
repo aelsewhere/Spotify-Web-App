@@ -9,56 +9,58 @@
     {% block extra_styles %}{% endblock %}
 </head>
 <body>
-    <!-- Header -->
-    <header id="header">
-        <div class="toolbar">
-            <!-- Home Button -->
-            <a href="{{ url_for('home') }}" class="icon-placeholder">
-                <i class="fas fa-home"></i>
-            </a>
-            <!-- Dashboard Button -->
-            <a href="{{ url_for('dashboard') }}" class="icon-placeholder">
-                <i class="fas fa-tachometer-alt"></i>
-            </a>
+    <div class="layout"> <!-- Layout div -->
+        <!-- Header -->
+        <header id="header">
+            <div class="toolbar">
+                <!-- Home Button -->
+                <a href="{{ url_for('home') }}" class="icon-placeholder">
+                    <i class="fas fa-home"></i>
+                </a>
+                <!-- Dashboard Button -->
+                <a href="{{ url_for('dashboard') }}" class="icon-placeholder">
+                    <i class="fas fa-tachometer-alt"></i>
+                </a>
 
-            <!-- User Settings Button -->
-            <div class="user-settings">
-                <button class="icon-placeholder" id="settings-button">
-                    <i class="fas fa-user-cog"></i>
-                </button>
-                <div class="dropdown-menu" id="settings-dropdown">
-                    {% if 'access_token' in session %}
-                        <a href="{{ url_for('profile') }}">Profile</a>
-                        <a href="{{ url_for('settings') }}">Settings</a>
-                        <a href="{{ url_for('logout') }}">Logout</a>
-                    {% else %}
-                        <a href="{{ url_for('login') }}">Login</a>>
-                    {% endif %}
+                <!-- User Settings Button -->
+                <div class="user-settings">
+                    <button class="icon-placeholder" id="settings-button">
+                        <i class="fas fa-user-cog"></i>
+                    </button>
+                    <div class="dropdown-menu" id="settings-dropdown">
+                        {% if 'access_token' in session %}
+                            <a href="{{ url_for('profile') }}">Profile</a>
+                            <a href="{{ url_for('settings') }}">Settings</a>
+                            <a href="{{ url_for('logout') }}">Logout</a>
+                        {% else %}
+                            <a href="{{ url_for('login') }}">Login</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- Main Content -->
-    <main style="margin-top: 3em;">
-        {% block content %}{% endblock %}
-    </main>
+        <!-- Main Content -->
+        <main>
+            {% block content %}{% endblock %}
+        </main>
 
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="container">
-            <ul class="icons">
-                <li><a href="https://twitter.com" class="fab fa-twitter" target="_blank"></a></li>
-                <li><a href="https://facebook.com" class="fab fa-facebook-f" target="_blank"></a></li>
-                <li><a href="https://instagram.com" class="fab fa-instagram" target="_blank"></a></li>
-            </ul>
-            <div class="copyright">
-                <ul class="menu">
-                    <li>&copy; 2025 Spotify Web App. All rights reserved.</li>
+        <!-- Footer -->
+        <footer id="footer">
+            <div class="container">
+                <ul class="icons">
+                    <li><a href="https://twitter.com" class="fab fa-twitter" target="_blank"></a></li>
+                    <li><a href="https://facebook.com" class="fab fa-facebook-f" target="_blank"></a></li>
+                    <li><a href="https://instagram.com" class="fab fa-instagram" target="_blank"></a></li>
                 </ul>
+                <div class="copyright">
+                    <ul class="menu">
+                        <li>&copy; 2025 Spotify Web App. All rights reserved.</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div> <!-- End of layout div -->
     <script src="{{ url_for('static', filename='assets/js/toggle.js') }}"></script>
 </body>
 </html>
