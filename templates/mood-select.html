@@ -83,7 +83,7 @@
             Object.keys(colorGroups).forEach(hex => {
                 const colorGroupDiv = document.createElement('div');
                 colorGroupDiv.className = 'color-group';
-                colorGroupDiv.id = `hex${hex.replace('#', '')}`; // Prefix with "hex" and remove "#"
+                colorGroupDiv.id = `hex${hex.replace('#', '')}`; 
 
                 const buttonGroup = document.createElement('div');
                 buttonGroup.className = 'button-group';
@@ -92,7 +92,7 @@
                     const button = document.createElement('button');
                     button.textContent = emote.Emotion;
                     button.className = 'filter-button';
-                    button.style.backgroundColor = hex;
+                    button.style.setProperty('--shadow-color', hex); 
                     button.style.opacity = Math.min(1, Math.max(0.2, (emote.Intensity || 1) / 5));
 
                     // Add click event to handle selection
