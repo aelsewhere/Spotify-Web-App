@@ -608,6 +608,9 @@ section.contact p {
     display: flex;
     gap: 20px; 
     justify-content: space-between; 
+    width: 100%;
+    box-sizing: border-box;
+    flex-grow: 1;
 }
 
 .column {
@@ -615,6 +618,11 @@ section.contact p {
     display: flex;
     flex-direction: column; 
     gap: 10px; 
+    box-sizing: border-box;
+}
+
+.column.middle {
+    flex: 2; 
 }
 
 .color-group {
@@ -633,12 +641,13 @@ section.contact p {
 .button-group { /* Button group within a category */
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     gap: 10px;
     width: 100%; 
 }
 
 .filter-button { /* Button styling for mood filters */
+    flex: 1 1 calc(33.333% - 10px); /* Responsive width */
     padding: 10px 20px;
     color: var(--text-color-light);
     border: none;
@@ -646,6 +655,8 @@ section.contact p {
     cursor: pointer;
     background-color: var(--primary-color-light);
     transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    box-sizing: border-box; 
 }
 
 .filter-button:hover {

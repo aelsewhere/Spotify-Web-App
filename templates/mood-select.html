@@ -21,7 +21,7 @@
 
     // Create 3 columns
     const columns = [document.createElement('div'), document.createElement('div'), document.createElement('div')];
-    columns.forEach(column => {
+    columns.forEach((column, index) => {
         column.className = 'column'; // Add a class for styling
         categoryContainer.appendChild(column); // Append each column to the container
     });
@@ -47,6 +47,12 @@
         '#CE8170': { column: 1, order: 6 },
         '#17A9E0': { column: 2, order: 6 },
     };
+
+    columns.forEach((column, index) => {
+        if (index === 1) { // Make the middle column wider
+            column.classList.add('middle');
+        }
+    });
 
     const maxSelections = 3; // Maximum number of buttons the user can select
     let selectedButtons = []; // Array to track selected buttons
