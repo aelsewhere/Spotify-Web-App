@@ -522,18 +522,23 @@ section.contact p {
     display: inline-block;
     padding: 10px 20px;
     color: var(--text-color-light);
-    background-color: var(--primary-color-light); 
+    background-color: var(primary-color-light);
     border-radius: 5px;
     text-align: center;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
     position: relative;
-    z-index: 10; /* Ensure the button is on top */
+    z-index: 10;
 }
 
 .button:hover {
     background-color: var(--secondary-color);
     transform: scale(1.05);
+    color: var(--text-color-light);
+}
+
+.button:active {
+    background-color: var(--secondary-color);
     color: var(--text-color-light);
 }
 
@@ -609,7 +614,7 @@ section.contact p {
     flex: 1; 
     display: flex;
     flex-direction: column; 
-    gap: 20px; 
+    gap: 10px; 
 }
 
 .color-group {
@@ -634,62 +639,22 @@ section.contact p {
 }
 
 .filter-button { /* Button styling for mood filters */
-    position: relative;
-    z-index: 10;
-    align-items: center;
-    background-color: var(--black-color); 
-    border: 2px solid var(--black-color);
-    border-radius: 8px;
-    box-sizing: border-box;
+    padding: 10px 20px;
     color: var(--text-color-light);
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    display: flex;
-    font-size: 16px;
-    height: 48px;
-    justify-content: center;
-    line-height: 24px;
-    max-width: 100%;
-    padding: 0px 25px;
-    user-select: none;
-    text-decoration: none;
-    text-align: center;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    --shadow-color: var(var(--primary-color-light));
-}
-
-.filter-button:after { /* Shadow and background color are kind of switched. */
-    content: "";
-    background-color: var(--shadow-color);
-    width: 100%;
-    border-radius: 8px;
-    display: block;
-    left: 0;
-    position: absolute;
-    z-index: -1;
-    top: -2px;
-    height: 48px;
-    transform: translate(8px, 8px);
-    transition: transform .2s ease-out;
-}
-
-.filter-button:hover:after {
-    transform: translate(0,0);
-}
-
-.filter-button:active {
-  background-color: var(--secondary-color);
-  outline: 0;
+    background-color: var(--primary-color-light);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .filter-button:hover {
-  outline: 0;
+    background-color: var(--secondary-color);
+    transform: scale(1.1); 
 }
 
-@media (min-width: 768px) {
-    .filter-button {
-        padding: 0 40px;
-    }
+.filter-button.selected {
+    border: 2px solid var(--secondary-color);
 }
 
 .row { /* Grid Layout */

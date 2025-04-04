@@ -92,7 +92,7 @@
                     const button = document.createElement('button');
                     button.textContent = emote.Emotion;
                     button.className = 'filter-button';
-                    button.style.setProperty('--shadow-color', hex); 
+                    button.style.backgroundColor = hex;
                     button.style.opacity = Math.min(1, Math.max(0.2, (emote.Intensity || 1) / 5));
 
                     // Add click event to handle selection
