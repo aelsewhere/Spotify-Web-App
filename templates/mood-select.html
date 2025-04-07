@@ -20,10 +20,10 @@
 <div id="playlistLengthPrompt" class="hidden">
     <h2>Select Playlist Length</h2>
     <input type="range" id="playlistLengthSlider" min="10" max="180" step="10" value="60">
-    <p>Length: <span id="playlistLengthValue">60</span> minutes</p>
+    <p class="prompt-message">Length: <span id="playlistLengthValue">60</span> minutes</p>
     <div class="button-group">
         <button id="backButton" class="back-button">Back</button>
-        <button id="generatePlaylistButton" class="go-button">Go</button>
+        <button id="generatePlaylistButton" class="go-button">Generate Playlist</button>
     </div>
 </div>
 <script>
@@ -32,8 +32,8 @@
     // Create 3 columns
     const columns = [document.createElement('div'), document.createElement('div'), document.createElement('div')];
     columns.forEach((column, index) => {
-        column.className = 'column'; // Add a class for styling
-        categoryContainer.appendChild(column); // Append each column to the container
+        column.className = 'column'; 
+        categoryContainer.appendChild(column); 
     });
 
     // Define the desired column and order for each hex group
@@ -59,13 +59,13 @@
     };
 
     columns.forEach((column, index) => {
-        if (index === 1) { // Make the middle column wider
+        if (index === 1) { 
             column.classList.add('middle');
         }
     });
 
-    const maxSelections = 3; // Maximum number of buttons the user can select
-    let selectedButtons = []; // Array to track selected buttons
+    const maxSelections = 3; 
+    let selectedButtons = []; 
 
     const selectedMoodsList = document.getElementById('selectedMoodsList');
     const selectedMoodsHeader = document.getElementById('selectedMoodsHeader');
@@ -187,7 +187,14 @@
     generatePlaylistButton.addEventListener('click', () => {
         const playlistLength = playlistLengthSlider.value;
         const selectedMoods = selectedButtons.map(button => button.textContent).join(',');
-        window.location.href = `mood-generate.html?moods=${encodeURIComponent(selectedMoods)}&length=${playlistLength}`;
+
+        // Add the slide-out animation to the playlist prompt
+        playlistPrompt.classList.add('slide-out-left');
+
+        // Wait for the animation to complete before navigating
+        setTimeout(() => {
+            window.location.href = `mood-generate.html?moods=${encodeURIComponent(selectedMoods)}&length=${playlistLength}`;
+        }, 500); 
     });
 
     const backButton = document.getElementById('backButton');
