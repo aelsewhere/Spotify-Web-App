@@ -12,9 +12,19 @@
     <div id="categoryContainer">
       <!-- Mood Buttons Here -->
     </div> 
-    <!-- Clear & Go Button -->
+    <!-- Clear & Next Button -->
     <button id="clearButton" class="clear-button" disabled>Clear</button> 
-    <button id="goButton" class="go-button" disabled>Go</button> 
+    <button id="nextButton" class="next-button" disabled>Next</button> 
+</div>
+
+<div id="playlistLengthPrompt" class="hidden">
+    <h2>Select Playlist Length</h2>
+    <input type="range" id="playlistLengthSlider" min="10" max="180" step="10" value="60">
+    <p>Length: <span id="playlistLengthValue">60</span> minutes</p>
+    <div class="button-group">
+        <button id="backButton" class="back-button">Back</button>
+        <button id="generatePlaylistButton" class="go-button">Go</button>
+    </div>
 </div>
 <script>
     const categoryContainer = document.getElementById('categoryContainer');
@@ -59,7 +69,7 @@
 
     const selectedMoodsList = document.getElementById('selectedMoodsList');
     const selectedMoodsHeader = document.getElementById('selectedMoodsHeader');
-    const goButton = document.getElementById('goButton'); 
+    const nextButton = document.getElementById('nextButton'); 
 
     const clearButton = document.getElementById('clearButton');
     clearButton.addEventListener('click', () => {
@@ -67,7 +77,7 @@
         selectedButtons = []; 
         selectedMoodsList.innerHTML = ''; 
         selectedMoodsHeader.style.display = 'none'; // Hide the header
-        goButton.disabled = true; // Disable the "Go" button
+        nextButton.disabled = true; // Disable the "Next" button
     });
 
     fetch('/static/notebooks/emotes.json')
@@ -99,7 +109,7 @@
                     button.textContent = emote.Emotion;
                     button.className = 'filter-button';
                     button.style.backgroundColor = hex;
-                    button.style.opacity = Math.min(1, Math.max(0.2, (emote.Intensity || 1) / 5));
+                    button.style.opacity = Math.min(1, (Math.max(0.25, (emote.Intensity || 1) / 20))+0.25);
 
                     // Add click event to handle selection
                     button.addEventListener('click', () => {
@@ -127,7 +137,7 @@
                         selectedMoodsHeader.style.display = selectedButtons.length > 0 ? 'block' : 'none';
 
                         const hasSelections = selectedButtons.length > 0;
-                        goButton.disabled = !hasSelections;
+                        nextButton.disabled = !hasSelections;
                         clearButton.disabled = !hasSelections;
                     });
 
@@ -142,21 +152,68 @@
         })
         .catch(error => console.error('Error loading emotes:', error));
 
-    // Add a click event listener to the "Go" button
-    goButton.addEventListener('click', () => {
+    // Add a click event listener to the "Next" button
+    nextButton.addEventListener('click', () => {
         if (selectedButtons.length > 0) {
-            const selectedMoods = selectedButtons.map(button => button.textContent).join(',');
-            window.location.href = `/mood-generate?moods=${encodeURIComponent(selectedMoods)}`; 
+            const container = document.querySelector('.container');
+            container.classList.add('slide-out-left');
+
+            // Wait for the slide-out animation to complete
+            setTimeout(() => {
+                container.style.display = 'none'; // Hide the container completely
+                const playlistPrompt = document.getElementById('playlistLengthPrompt');
+                playlistPrompt.classList.remove('hidden');
+                playlistPrompt.classList.add('slide-in-right');
+            }, 500); // Match the animation duration
         }
+    });
+
+    // Enable or disable the "Next" button based on mood selection
+    selectedButtons.forEach(button => {
+        const hasSelections = selectedButtons.length > 0;
+        nextButton.disabled = !hasSelections;
+        clearButton.disabled = !hasSelections;
+    });
+
+    // Update playlist length value dynamically
+    const playlistLengthSlider = document.getElementById('playlistLengthSlider');
+    const playlistLengthValue = document.getElementById('playlistLengthValue');
+    playlistLengthSlider.addEventListener('input', () => {
+        playlistLengthValue.textContent = playlistLengthSlider.value;
+    });
+
+    // Handle playlist generation
+    const generatePlaylistButton = document.getElementById('generatePlaylistButton');
+    generatePlaylistButton.addEventListener('click', () => {
+        const playlistLength = playlistLengthSlider.value;
+        const selectedMoods = selectedButtons.map(button => button.textContent).join(',');
+        window.location.href = `mood-generate.html?moods=${encodeURIComponent(selectedMoods)}&length=${playlistLength}`;
+    });
+
+    const backButton = document.getElementById('backButton');
+    const playlistPrompt = document.getElementById('playlistLengthPrompt');
+    const container = document.querySelector('.container');
+
+    // Handle "Back" button click
+    backButton.addEventListener('click', () => {
+        playlistPrompt.classList.add('slide-out-right');
+        setTimeout(() => {
+            playlistPrompt.classList.add('hidden');
+            playlistPrompt.classList.remove('slide-out-right');
+            container.style.display = 'block';
+            container.classList.remove('slide-out-left');
+            container.classList.add('slide-in-left');
+        }, 500); 
     });
 
     clearButton.addEventListener('click', () => {
         selectedButtons.forEach(button => button.classList.remove('selected'));
-        selectedButtons = []; // Clear the selected buttons array
-        selectedMoodsList.innerHTML = ''; // Clear the displayed moods list
-        selectedMoodsHeader.style.display = 'none'; // Hide the header
-        goButton.disabled = true; // Disable the "Go" button
+        selectedButtons = []; 
+        selectedMoodsList.innerHTML = ''; 
+        selectedMoodsHeader.style.display = 'none'; 
+        nextButton.disabled = true; 
     });
 
+    
 </script>
 {% endblock %}
