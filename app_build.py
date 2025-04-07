@@ -107,14 +107,11 @@ def mood_select():
     return render_template('mood-select.html')
 
 @build_v1.route('/mood-generate')
+@build_v1.route('/mood-generate.html')
 def mood_generate():
     moods = request.args.get('moods', '').split(',') if request.args.get('moods') else []
     return render_template('mood-generate.html', moods=moods)
 
-@build_v1.route('/mood-generate.html')
-def mood_generate_html():
-    moods = request.args.get('moods', '').split(',') if request.args.get('moods') else []
-    return render_template('mood-generate.html', moods=[])
 
 @build_v1.route('/mood-generate/<moods>')
 def mood_generate_with_moods(moods):
