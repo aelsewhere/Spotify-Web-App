@@ -44,6 +44,7 @@ audio, video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    overflow-x: hidden;
 }
 
 
@@ -87,6 +88,7 @@ body {
     font-weight: 300;
     background: var(--background-color);
     color: var(--text-color);
+    overflow: hidden;
 }
 
 main {
@@ -155,6 +157,7 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after {
     max-width: 100%;
     width: 1400px;
 }
+
 .card {
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -183,6 +186,35 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 
 .wrapper.style2 {
     padding-top: 0;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: var(--text-color-light);
+    background-color: var(--primary-color-light);
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+    z-index: 10;
+}
+
+.button:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+    color: var(--text-color-light);
+}
+
+.button:active {
+    background-color: var(--secondary-color);
+    color: var(--text-color-light);
+}
+
+.button.circled {
+    border-radius: 50%;
+    padding: 15px;
 }
 
 
@@ -515,97 +547,12 @@ section.contact p {
 
 /*---------------------------------------------------------------*/
 /*---------------------------------------------------------------*/
-/* Button Styling */
-/*---------------------------------------------------------------*/
-/*---------------------------------------------------------------*/
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    color: var(--text-color-light);
-    background-color: var(primary-color-light);
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    position: relative;
-    z-index: 10;
-}
-
-.button:hover {
-    background-color: var(--secondary-color);
-    transform: scale(1.05);
-    color: var(--text-color-light);
-}
-
-.button:active {
-    background-color: var(--secondary-color);
-    color: var(--text-color-light);
-}
-
-.button.circled {
-    border-radius: 50%;
-    padding: 15px;
-}
-
-.go-button { /* go button for mood-selection */
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: var(--text-color-light);
-  background-color: var(--primary-color);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.go-button:disabled {
-  background-color: var(--disabled-color);
-  cursor: not-allowed; /* Change cursor to indicate disabled state */
-}
-
-.go-button:hover:not(:disabled) {
-  background-color: var(--secondary-color);
-  transform: scale(1.05); /* Slight zoom on hover */
-}
-
-.clear-button { /* clear button for mood-selection */
-  position: fixed;
-  bottom: 20px;
-  left: 40%;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: var(--text-color-light);
-  background-color: var(--primary-color);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.clear-button:disabled {
-  background-color: var(--disabled-color);
-  cursor: not-allowed; /* Change cursor to indicate disabled state */
-}
-
-.clear-button:hover:not(:disabled) {
-  background-color: var(--secondary-color);
-  transform: scale(1.05); /* Slight zoom on hover */
-}
-
-
-
-
-
-/*---------------------------------------------------------------*/
-/*---------------------------------------------------------------*/
 /* Mood Selection Styling */
 /*---------------------------------------------------------------*/
 /*---------------------------------------------------------------*/
 #categoryContainer { /* Layout for Mood Selection */
     display: flex;
+    overflow: hidden;
     gap: 20px; 
     justify-content: space-between; 
     width: 100%;
@@ -644,6 +591,7 @@ section.contact p {
     justify-content: space-between;
     gap: 10px;
     width: 100%; 
+    overflow: hidden; /* Hide overflow */
 }
 
 .filter-button { /* Button styling for mood filters */
@@ -666,6 +614,54 @@ section.contact p {
 
 .filter-button.selected {
     border: 2px solid var(--secondary-color);
+}
+
+.next-button { /* next button for mood-selection */
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: var(--text-color-light);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.next-button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+}
+
+.next-button:hover:not(:disabled) {
+  background-color: var(--secondary-color);
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.clear-button { 
+  position: fixed;
+  bottom: 20px;
+  left: 40%;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: var(--text-color-light);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.clear-button:disabled {
+  background-color: var(--disabled-color);
+  cursor: not-allowed; 
+}
+
+.clear-button:hover:not(:disabled) {
+  background-color: var(--secondary-color);
+  transform: scale(1.05); /* Slight zoom on hover */
 }
 
 .row { /* Grid Layout */
@@ -710,6 +706,88 @@ section.contact p {
 .row > .col-12-mobile {
     width: 100%;
 }
+
+
+
+
+
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+/* Playlist Length Selection Styling */
+/*---------------------------------------------------------------*/
+/*---------------------------------------------------------------*/
+.slide-out-left {
+    animation: slide-out-left 0.5s forwards;
+}
+
+.slide-in-right {
+    animation: slide-in-right 0.5s forwards;
+}
+
+@keyframes slide-out-left {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.back-button {
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.back-button:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05); 
+}
+
+#playlistLengthPrompt {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  background-color: var(--primary-color-light);
+  z-index: 10;
+  padding: 20px;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  color: var(--text-color-light);
+}
+
+.go-button {
+    background-color: var(--primary-color-light);
+    color: var(--text-color-light);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.go-button:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+
 
 
 
