@@ -27,15 +27,15 @@
 /* Global Reset */
 /*---------------------------------------------------------------*/
 /*---------------------------------------------------------------*/
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+header, footer, html, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, body
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp, small,
 strike, strong, sub, sup, tt, var, b, u, i, center,
 dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, figure,
-figcaption, footer, header, hgroup, menu, nav,
+figcaption, header, hgroup, menu, nav,
 output, ruby, section, summary, time, mark,
 audio, video {
     margin: 0;
@@ -56,7 +56,6 @@ audio, video {
 /* Utility Classes */
 /*---------------------------------------------------------------*/
 /*---------------------------------------------------------------*/
-
 .hidden {
     display: none;
 }
@@ -82,20 +81,45 @@ body:not(.homepage) main {
     padding-top: 6em; /* Adjust based on the height of the toolbar */
 }
 
+h1, h2, footer {
+    overflow: hidden;
+}
+
 body {
+    display: flex;
+    min-height: 100vh;;
     line-height: 1.85em;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 300;
     background: var(--background-color);
     color: var(--text-color);
-    overflow: hidden;
+}
+
+html, body {
+    display: flex;
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-y: auto; /* Allow vertical scroll */
+    margin: 0;
+    padding: 0;
+    flex-direction: column; 
 }
 
 main {
     padding: 5em 1em; 
     margin: 0 auto; 
     max-width: 1200px; 
-    box-sizing: border-box; /* Include padding in the width calculation */
+    box-sizing: border-box;
+    flex-grow: 1; 
+}
+
+.layout {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+    height: 100%;
 }
 
 .widget-container {
@@ -110,6 +134,7 @@ main {
     min-width: 300px;
     max-width: 48%;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 ul.icons {
@@ -145,6 +170,7 @@ ul.icons li a:hover {
     color: white;
     padding: 20px 0;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -156,6 +182,7 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after {
     margin: 0 auto;
     max-width: 100%;
     width: 1400px;
+    overflow: hidden;
 }
 
 .card {
@@ -166,7 +193,7 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after {
     min-width: 300px; /* Minimum width for cards */
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px; /* Optional: Add spacing between cards */
+    margin: 10px; 
 }
 
 .card-container {
@@ -190,31 +217,44 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 
 .button {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 8px 16px;
     color: var(--text-color-light);
     background-color: var(--primary-color-light);
     border-radius: 5px;
     text-align: center;
     text-decoration: none;
+    overflow: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
     position: relative;
     z-index: 10;
+    box-sizing: border-box;
+    border: none;
+    margin: 0;
+    width: auto;
+    height: auto;
 }
 
 .button:hover {
     background-color: var(--secondary-color);
     transform: scale(1.05);
     color: var(--text-color-light);
+    overflow: hidden;
 }
 
 .button:active {
     background-color: var(--secondary-color);
     color: var(--text-color-light);
+    overflow: hidden;
 }
 
 .button.circled {
     border-radius: 50%;
     padding: 15px;
+    overflow: hidden;
+    width: auto;
+    height: auto;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 
@@ -368,8 +408,8 @@ body:not(.homepage) #header .icon-placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.5em; 
-    height: 2.5em; 
+    width: 2em; 
+    height: 2em; 
     border-radius: 50%; /* Circular buttons */
     background-color: var(--primary-color-light);
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -377,7 +417,7 @@ body:not(.homepage) #header .icon-placeholder {
 
 body:not(.homepage) #header .icon-placeholder:hover {
     background-color: var(--secondary-color); 
-    transform: scale(1.1); /* Slight zoom on hover */
+    transform: scale(1.01); /* Slight zoom on hover */
 }
 
 #header .logo {
@@ -403,12 +443,23 @@ body:not(.homepage) #header .icon-placeholder:hover {
 
 #footer {
     position: relative;
+    width: 100vw;
     overflow: hidden;
     padding: 2em 1em; 
     margin-top: 3em; 
     background-color: var(--primary-color);
     color: var(--text-color-light);
     text-align: center;
+}
+
+#footer .footer-container{
+    margin: 0 auto;
+    max-width: 100%;
+    width: 1400px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 #footer h3 {
@@ -473,6 +524,7 @@ section.contact p {
     align-items: center;
     justify-content: space-between; 
     position: relative;
+    overflow: hidden;
 }
 
 
@@ -490,6 +542,7 @@ section.contact p {
     right: 0;
     margin: 0.5em;
     z-index: 1000;
+    overflow: hidden;
 }
 
 #settings-button {
@@ -711,11 +764,47 @@ section.contact p {
 
 
 
+
+
+
+
 /*---------------------------------------------------------------*/
 /*---------------------------------------------------------------*/
 /* Playlist Length Selection Styling */
 /*---------------------------------------------------------------*/
 /*---------------------------------------------------------------*/
+#playlistLengthPrompt {
+    position: relative;
+    text-align: center;
+    background-color: var(--background-color);
+    border: 1px solid var(--shadow-color);
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 500px;
+}
+
+.prompt-message {
+    font-size: 1.2em;
+    color: var(--text-color-light);
+    margin-bottom: 10px;
+}
+
+#playlistLengthPrompt h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: var(--text-color-light);
+}
+
+#playlistLengthSlider {
+    width: 80%;
+    margin: 15px 0;
+}
+
+#playlistLengthValue {
+    font-size: 1.2em;
+    color: var(--secondary-color);
+}
+
 .slide-out-left {
     animation: slide-out-left 0.5s forwards;
 }
@@ -747,8 +836,8 @@ section.contact p {
 }
 
 .back-button {
-    background-color: var(--primary-color-light);
-    color: var(--text-color);
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
     border: none;
     padding: 10px 20px;
     cursor: pointer;
@@ -761,9 +850,7 @@ section.contact p {
 }
 
 #playlistLengthPrompt {
-  position: absolute;
-  top: 10px;
-  left: 0;
+  position: relative;
   width: 100%;
   background-color: var(--primary-color-light);
   z-index: 10;
@@ -773,7 +860,7 @@ section.contact p {
 }
 
 .go-button {
-    background-color: var(--primary-color-light);
+    background-color: var(--primary-color);
     color: var(--text-color-light);
     border: none;
     padding: 10px 20px;
@@ -846,5 +933,6 @@ section.contact p {
 
 .playback-controls {
     display: flex;
-    gap: 20px; /* Space between controls */
+    gap: 20px;
+    overflow: hidden;
 }
