@@ -452,7 +452,7 @@ body:not(.homepage) #header .icon-placeholder:hover {
     text-align: center;
 }
 
-#footer .footer-container{
+#footer .footer-container {
     margin: 0 auto;
     max-width: 100%;
     width: 1400px;
@@ -460,6 +460,7 @@ body:not(.homepage) #header .icon-placeholder:hover {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    align-items: center;
 }
 
 #footer h3 {
