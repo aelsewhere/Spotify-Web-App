@@ -14,6 +14,22 @@
             <li>No moods selected.</li>
         {% endif %}
     </ul>
+        <!-- Card List -->
+    {% for i in range(1, 6) %}
+    <div class="card text-white bg-info mb-3">
+        <h5 class="card-header">
+            Card Title {{ i }}
+        </h5>
+        <div class="card-body">
+            <p class="card-text">
+                Card content for item {{ i }}.
+            </p>
+        </div>
+        <div class="card-footer">
+            Card footer {{ i }}
+        </div>
+    </div>
+    {% endfor %}
     <button onclick="window.location.href='/mood-select'">Back to Mood Select</button> <!-- Button to go back -->
 </div>
 {% endblock %}
