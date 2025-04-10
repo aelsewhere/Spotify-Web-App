@@ -1,10 +1,31 @@
 from flask import Flask, render_template, jsonify, redirect, url_for, session, request
 from scripts.auth import authenticate
+from functools import wraps
+import spotipy
+
+
+
 
 
 # build 1
 build_v1 = Flask(__name__)
 build_v1.secret_key = 'kdjsfakjsdhfue9oweiuf8i'
+
+# wrapper to check if user is authenticated
+def require_auth(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        access_token = session.get('access_token')
+        if not access_token:
+            return redirect(url_for('home'))
+        return f(*args, **kwargs)
+    return decorated_function
+def get_spotify_client():
+    access_token = session.get('access_token')
+    if not access_token:
+        return None
+    return spotipy.Spotify(auth=access_token)
+
 
 
 
@@ -30,6 +51,11 @@ def spotify_login():
     else:
       return jsonify({'error': 'Spotify Login: authentication url not found.'})
 
+@build_v1.route('/logout')
+def logout():
+    session.pop('access_token',None)
+    return redirect(url_for('home'))
+
 @ build_v1.route('/callback')
 def callback():
     from flask import request
@@ -50,20 +76,19 @@ def callback():
     except Exception as e:
         return jsonify({'error': f'Callback: {e}'})
 
+
+
+
+
 @ build_v1.route('/dashboard')
+@ require_auth
 def dashboard():
-    import spotipy
-    from spotipy.oauth2 import SpotifyOAuth
-
-    access_token = session.get('access_token')
-    if not access_token:
-        return redirect(url_for('home'))  # Redirect to home if no access token is found
-
-    sp = spotipy.Spotify(auth=access_token)
+    sp = get_spotify_client()
+    if not sp:
+        return redirect(url_for('home'))
     try:
         # Fetch top 10 tracks
         top_tracks = sp.current_user_top_tracks(limit=10)
-        #print("Top Tracks Response:", top_tracks)  # Debugging
         tracks = [
             {
                 'name': track['name'],
@@ -75,7 +100,6 @@ def dashboard():
 
         # Fetch recently played tracks
         recently_played = sp.current_user_recently_played(limit=10)
-        #print("Recently Played Response:", recently_played)  # Debugging
         recent_tracks = [
             {
                 'name': item['track']['name'],
@@ -88,14 +112,7 @@ def dashboard():
         tracks = []
         recent_tracks = []
         print(f"Error fetching data: {e}")
-
-    print("Tracks being passed to template:", tracks)
     return render_template('dashboard.html', tracks=tracks, recent_tracks=recent_tracks)
-
-@build_v1.route('/logout')
-def logout():
-    session.pop('access_token',None)
-    return redirect(url_for('home'))
 
 @build_v1.route('/about')
 def about():
@@ -132,5 +149,24 @@ def settings():
     return render_template('settings.html')
 
 @build_v1.route('/monthly-generate')
+@require_auth
 def monthly_generate():
-    return render_template('monthly-generate.html')
+    sp = get_spotify_client()
+    if not sp:
+        return redirect(url_for('home'))
+    try:
+        top_tracks = sp.current_user_top_tracks(limit=50)
+        tracks = [
+            {
+                'name': track['name'],
+                'artist': track['artists'][0]['name'],
+                'album': track['album']['name']
+            }
+            for track in top_tracks['items']
+        ]
+    except Exception as e:
+        tracks = []
+        recent_tracks = []
+        print(f"Error fetching data: {e}")
+
+    return render_template('monthly-generate.html', tracks=tracks)
