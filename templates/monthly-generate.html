@@ -4,26 +4,36 @@
 
 {% block content %}
 
-<div class="container" style="margin-top: 375em;">
+<div class="container content-container">
     <h1>Build monthly top 50.</h1>
     <p>Generation starts here</p>
 
-    <!-- Card List -->
-    {% for i in range(1, 51) %}
-    <div class="card text-white bg-info mb-3">
-        <h5 class="card-header">
-            Card Title {{ i }}
-        </h5>
-        <div class="card-body">
-            <p class="card-text">
-                Card content for item {{ i }}.
-            </p>
-        </div>
-        <div class="card-footer">
-            Card footer {{ i }}
+    <!-- Card List of Monthly top 50 -->
+    {% if tracks %}
+    <div class="container track-list-container">
+        <div class="row">
+            {% for track in tracks %}
+            <div class="col-12 mb-3">
+                <div class="card text-white bg-info">
+                    <h5 class="card-header">
+                        {{ track.name }}
+                    </h5>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <strong>Artist: {{ track.artist }}</strong>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        Album: {{ track.album }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
+    {% else %}
+        <p>No top tracks found.</p>
+    {% endif %}
 </div>
 
 {% endblock %}
