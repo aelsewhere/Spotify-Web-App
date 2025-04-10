@@ -19,28 +19,17 @@ from scripts.auth import authenticate
 spotify_client = authenticate()
 
 # Get User Info
-from scripts.user_info import get_user_top_tracks
-from scripts.user_info import get_user_top_artists
-from scripts.user_info import get_user_playlists
+from scripts.user_info import get_user_top_tracks_uri
+
+
+
 
 
 def generate_top_50_songs():
     # Get the user's top tracks
-    top_tracks = get_user_top_tracks(spotify_client, 50)
-    # Build library of top tracks
-    top_tracks_data = []
-    for i, track in enumerate(top_tracks):
-        track_data = {
-            'name': track['name'],
-            'artist': track['artists'][0]['name'],
-            'popularity': track['popularity'],
-            'danceability': track['danceability'],
-            'energy': track['energy'],
-            'valence': track['valence'],
-            'tempo': track['tempo']
-        }
-        top_tracks_data.append(track_data)
-    return top_tracks_data
+    top_tracks = get_user_top_tracks_uri(spotify_client, top_tracks=50)
+    # Get 
+
 
 
 if __name__ == "__main__":
